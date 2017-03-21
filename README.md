@@ -1,2 +1,2 @@
-# Bproje
-Bitirme Projesi asda
+# Bitirme Projesi 
+Bitirme Projesi
