@@ -1,0 +1,1 @@
+json.array! @academicterms, partial: 'academicterms/academicterm', as: :academicterm

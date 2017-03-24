@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Departmentlicenses</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Year</th>
+      <th>Has night</th>
+      <th>Department</th>
+      <th>License</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @departmentlicenses.each do |departmentlicense| %>
+      <tr>
+        <td><%= departmentlicense.year %></td>
+        <td><%= departmentlicense.has_night %></td>
+        <td><%= departmentlicense.department %></td>
+        <td><%= departmentlicense.license %></td>
+        <td><%= link_to 'Show', departmentlicense %></td>
+        <td><%= link_to 'Edit', edit_departmentlicense_path(departmentlicense) %></td>
+        <td><%= link_to 'Destroy', departmentlicense, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Departmentlicense', new_departmentlicense_path %>

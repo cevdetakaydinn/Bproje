@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Term:</strong>
+  <%= @academicterm.term %>
+</p>
+
+<p>
+  <strong>Year:</strong>
+  <%= @academicterm.year %>
+</p>
+
+<%= link_to 'Edit', edit_academicterm_path(@academicterm) %> |
+<%= link_to 'Back', academicterms_path %>

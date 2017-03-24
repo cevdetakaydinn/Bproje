@@ -1,0 +1,1 @@
+json.array! @departmentlessons, partial: 'departmentlessons/departmentlesson', as: :departmentlesson

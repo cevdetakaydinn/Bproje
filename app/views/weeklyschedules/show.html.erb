@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Lessonhours:</strong>
+  <%= @weeklyschedule.lessonhours %>
+</p>
+
+<p>
+  <strong>Day:</strong>
+  <%= @weeklyschedule.day %>
+</p>
+
+<p>
+  <strong>Curriculum:</strong>
+  <%= @weeklyschedule.curriculum %>
+</p>
+
+<p>
+  <strong>Classroom:</strong>
+  <%= @weeklyschedule.classroom %>
+</p>
+
+<%= link_to 'Edit', edit_weeklyschedule_path(@weeklyschedule) %> |
+<%= link_to 'Back', weeklyschedules_path %>

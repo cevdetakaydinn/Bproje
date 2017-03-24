@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  lessonhours_id: 
+  day_id: 
+  curriculum_id: 
+  classroom_id: 
+
+two:
+  lessonhours_id: 
+  day_id: 
+  curriculum_id: 
+  classroom_id: 

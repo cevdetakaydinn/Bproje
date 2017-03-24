@@ -1,0 +1,25 @@
+<%= form_for(@academicterm) do |f| %>
+  <% if @academicterm.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@academicterm.errors.count, "error") %> prohibited this academicterm from being saved:</h2>
+
+      <ul>
+      <% @academicterm.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :term %><br>
+    <%= f.number_field :term %>
+  </div>
+  <div class="field">
+    <%= f.label :year %><br>
+    <%= f.number_field :year %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

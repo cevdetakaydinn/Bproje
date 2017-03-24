@@ -1,0 +1,1 @@
+json.array! @weeklyschedules, partial: 'weeklyschedules/weeklyschedule', as: :weeklyschedule

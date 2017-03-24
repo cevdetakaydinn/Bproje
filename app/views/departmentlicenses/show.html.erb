@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Year:</strong>
+  <%= @departmentlicense.year %>
+</p>
+
+<p>
+  <strong>Has night:</strong>
+  <%= @departmentlicense.has_night %>
+</p>
+
+<p>
+  <strong>Department:</strong>
+  <%= @departmentlicense.department %>
+</p>
+
+<p>
+  <strong>License:</strong>
+  <%= @departmentlicense.license %>
+</p>
+
+<%= link_to 'Edit', edit_departmentlicense_path(@departmentlicense) %> |
+<%= link_to 'Back', departmentlicenses_path %>

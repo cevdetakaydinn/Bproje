@@ -1,0 +1,1 @@
+json.partial! "departmentlessons/departmentlesson", departmentlesson: @departmentlesson

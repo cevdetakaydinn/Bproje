@@ -1,0 +1,1 @@
+json.partial! "academicterms/academicterm", academicterm: @academicterm

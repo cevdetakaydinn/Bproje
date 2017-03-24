@@ -1,0 +1,1 @@
+json.partial! "departmentlicenses/departmentlicense", departmentlicense: @departmentlicense

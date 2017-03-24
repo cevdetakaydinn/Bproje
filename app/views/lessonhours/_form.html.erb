@@ -1,0 +1,25 @@
+<%= form_for(@lessonhour) do |f| %>
+  <% if @lessonhour.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@lessonhour.errors.count, "error") %> prohibited this lessonhour from being saved:</h2>
+
+      <ul>
+      <% @lessonhour.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :beginning %><br>
+    <%= f.datetime_select :beginning %>
+  </div>
+  <div class="field">
+    <%= f.label :ending %><br>
+    <%= f.datetime_select :ending %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

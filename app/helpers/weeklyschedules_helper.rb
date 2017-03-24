@@ -1,0 +1,2 @@
+module WeeklyschedulesHelper
+end

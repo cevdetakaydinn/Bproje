@@ -1,0 +1,1 @@
+json.array! @departmentlicenses, partial: 'departmentlicenses/departmentlicense', as: :departmentlicense

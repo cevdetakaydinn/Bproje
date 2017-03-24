@@ -1,4 +1,20 @@
 Rails.application.routes.draw do
+  devise_for :admins
+  resources :weeklyschedules
+  resources :lessonhours
+  resources :days
+  resources :curriculums
+  resources :instructors
+  resources :departmentlessons
+  resources :lessons
+  resources :academicterms
+  resources :classrooms
+  resources :departmentlicenses
+  resources :licenses
+  resources :departments
+  resources :facilities
+  resources :universities
+  root to: "home#index"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

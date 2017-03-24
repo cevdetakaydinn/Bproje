@@ -1,0 +1,33 @@
+<%= form_for(@weeklyschedule) do |f| %>
+  <% if @weeklyschedule.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@weeklyschedule.errors.count, "error") %> prohibited this weeklyschedule from being saved:</h2>
+
+      <ul>
+      <% @weeklyschedule.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :lessonhours_id %><br>
+    <%= f.text_field :lessonhours_id %>
+  </div>
+  <div class="field">
+    <%= f.label :day_id %><br>
+    <%= f.text_field :day_id %>
+  </div>
+  <div class="field">
+    <%= f.label :curriculum_id %><br>
+    <%= f.text_field :curriculum_id %>
+  </div>
+  <div class="field">
+    <%= f.label :classroom_id %><br>
+    <%= f.text_field :classroom_id %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

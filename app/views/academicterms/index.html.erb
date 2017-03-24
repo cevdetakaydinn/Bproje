@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Academicterms</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Term</th>
+      <th>Year</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @academicterms.each do |academicterm| %>
+      <tr>
+        <td><%= academicterm.term %></td>
+        <td><%= academicterm.year %></td>
+        <td><%= link_to 'Show', academicterm %></td>
+        <td><%= link_to 'Edit', edit_academicterm_path(academicterm) %></td>
+        <td><%= link_to 'Destroy', academicterm, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Academicterm', new_academicterm_path %>
