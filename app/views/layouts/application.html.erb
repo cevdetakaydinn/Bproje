@@ -7,7 +7,7 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <nav class="navbar navbar-default">
+  <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
@@ -17,13 +17,12 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">Brand</a>
+      <%= link_to 'Home', root_path, class: "navbar-brand" %>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
         <li><a href="#">Link</a></li>
       </ul>
 
@@ -47,14 +46,56 @@
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
+<% if admin_signed_in? %>
+  <div id="wrapper">
+          <!-- Sidebar -->
+          <div id="sidebar-wrapper">
+              <ul class="sidebar-nav">
+                  <li class="sidebar-brand">
+                      <a href="#">
+                          WSG
+                      </a>
+                  </li>
+                  <li>
+                      <%= link_to 'Weekly Schedule', weeklyschedules_path, class: "" %>
+                  </li>
+                  <li>
+                      <%= link_to 'University', universities_path, class: "" %>
+                  </li>
+                  <li>
+                      <%= link_to 'Instructor', instructors_path, class: "" %>
+                  </li>
+                  <li>
+                      <%= link_to 'Lesson', lessons_path, class: "" %>
+                  </li>
+                  <li>
+                      <%= link_to 'License', licenses_path, class: "" %>
+                  </li>
+              </ul>
+          </div>
+<%end%>
+          <!-- /#sidebar-wrapper -->
 
-  <% if notice %>
-    <p class="alert alert-success"><%= notice %></p>
-  <% end %>
-  <% if alert %>
-    <p class="alert alert-danger"><%= alert %></p>
-  <% end %>
-<%= yield %>
+          <!-- Page Content -->
+          <div id="page-content-wrapper">
+              <div class="container-fluid">
+                  <div class="row">
+                      <div class="col-lg-12">
+                          <% if notice %>
+                            <p class="alert alert-success"><%= notice %></p>
+                          <% end %>
+                          <% if alert %>
+                            <p class="alert alert-danger"><%= alert %></p>
+                          <% end %>
+                          <%= yield %>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <!-- /#page-content-wrapper -->
+
+      </div>
+
 
 </body>
 </html>
