@@ -3,7 +3,25 @@
 <p>
   <strong>Name:</strong>
   <%= @university.name %>
+  <h2>Facilities</h2>
+
+
+<table class="table table-striped">
+  <tr>Facility</tr>
+  <tr></tr>
+  <% @university.facilities.each do |facility| %>
+  <tr>
+    <td><%= facility.name %></td>
+    <td>
+      <%= link_to 'Show', facility ,class:"btn btn-success"%>
+      <%= link_to 'Edit', edit_facility_path(facility),class:"btn btn-warning" %>
+      <%= link_to 'Destroy', facility, method: :delete, data: { confirm: 'Are you sure?' },class:"btn btn-danger" %>
+    </td>
+  </tr>
+      <% end %>
+</table>
 </p>
+
 
 <%= link_to 'Edit', edit_university_path(@university) %> |
 <%= link_to 'Back', universities_path %>

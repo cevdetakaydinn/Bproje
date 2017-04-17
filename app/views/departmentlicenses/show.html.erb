@@ -12,12 +12,12 @@
 
 <p>
   <strong>Department:</strong>
-  <%= @departmentlicense.department %>
+  <%= @departmentlicense.department.name %>
 </p>
 
 <p>
   <strong>License:</strong>
-  <%= @departmentlicense.license %>
+  <%= @departmentlicense.license.name %>
 </p>
 
 <%= link_to 'Edit', edit_departmentlicense_path(@departmentlicense) %> |

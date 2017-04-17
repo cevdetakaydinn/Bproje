@@ -1,4 +1,4 @@
-<%= form_for(@departmentlesson) do |f| %>
+<%= simple_form_for @departmentlesson do |f| %>
   <% if @departmentlesson.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@departmentlesson.errors.count, "error") %> prohibited this departmentlesson from being saved:</h2>
@@ -12,18 +12,15 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :hour_amount %><br>
-    <%= f.number_field :hour_amount %>
+    <%= f.input :hour_amount %><br>
   </div>
   <div class="field">
-    <%= f.label :lesson_id %><br>
-    <%= f.text_field :lesson_id %>
+    <%= f.select :lesson_id, Lesson.all.map { |l| [l.name, l.id, { class: l.id }] }, include_blank: true%><br>
   </div>
   <div class="field">
-    <%= f.label :departmentlicense_id %><br>
-    <%= f.text_field :departmentlicense_id %>
+    <%= f.select :departmentlicense_id, Departmentlicense.all.map { |l| [l.department.name+" "+l.license.name, l.id, { class: l.id }] }, include_blank: true%><br>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.button :submit %>
   </div>
 <% end %>

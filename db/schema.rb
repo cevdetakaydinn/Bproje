@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170324073017) do
+ActiveRecord::Schema.define(version: 20170417092043) do
 
   create_table "academicterms", force: :cascade do |t|
     t.integer  "term"
@@ -84,6 +84,7 @@ ActiveRecord::Schema.define(version: 20170324073017) do
     t.integer  "license_id"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
+    t.integer  "year"
   end
 
   add_index "departmentlicenses", ["department_id"], name: "index_departmentlicenses_on_department_id"
@@ -134,6 +135,7 @@ ActiveRecord::Schema.define(version: 20170324073017) do
   create_table "licenses", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "name"
   end
 
   create_table "universities", force: :cascade do |t|

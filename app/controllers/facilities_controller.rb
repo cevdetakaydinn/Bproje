@@ -69,6 +69,6 @@ class FacilitiesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def facility_params
-      params.require(:facility).permit(:name, :university_id)
+      params.require(:facility).permit(:name, :university_id, departments_attributes: [:id, :name, :_destroy])
     end
 end

@@ -7,12 +7,12 @@
 
 <p>
   <strong>Lesson:</strong>
-  <%= @departmentlesson.lesson %>
+  <%= @departmentlesson.lesson.name %>
 </p>
 
 <p>
   <strong>Departmentlicense:</strong>
-  <%= @departmentlesson.departmentlicense %>
+  <%= @departmentlesson.departmentlicense.department.name+ " "+@departmentlesson.departmentlicense.license.name %>
 </p>
 
 <%= link_to 'Edit', edit_departmentlesson_path(@departmentlesson) %> |

@@ -15,7 +15,7 @@
     <% @facilities.each do |facility| %>
       <tr>
         <td><%= facility.name %></td>
-        <td><%= facility.university %></td>
+        <td><%= facility.university.name %></td>
         <td><%= link_to 'Show', facility %></td>
         <td><%= link_to 'Edit', edit_facility_path(facility) %></td>
         <td><%= link_to 'Destroy', facility, method: :delete, data: { confirm: 'Are you sure?' } %></td>

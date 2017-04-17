@@ -69,6 +69,6 @@ class LicensesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def license_params
-      params.fetch(:license, {})
+      params.require(:license).permit(:name)
     end
 end

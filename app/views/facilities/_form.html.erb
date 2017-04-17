@@ -1,4 +1,4 @@
-<%= form_for(@facility) do |f| %>
+<%= simple_form_for @facility do |f| %>
   <% if @facility.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@facility.errors.count, "error") %> prohibited this facility from being saved:</h2>
@@ -12,14 +12,21 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
+    <%= f.input :name %><br>
   </div>
   <div class="field">
-    <%= f.label :university_id %><br>
-    <%= f.text_field :university_id %>
+    <%= f.input :university_id %><br>
   </div>
+  <div id='departments'>
+    <%= f.simple_fields_for :departments do |department| %>
+      <%= render 'department_fields', :f => department %>
+    <% end %>
+    <div class='links'>
+      <%= link_to_add_association 'add department', f, :departments %>
+    </div>
+  </div>
+
   <div class="actions">
-    <%= f.submit %>
+    <%= f.button :submit %>
   </div>
 <% end %>

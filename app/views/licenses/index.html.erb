@@ -12,9 +12,11 @@
   <tbody>
     <% @licenses.each do |license| %>
       <tr>
+        <td><%= license.name %></td>
         <td><%= link_to 'Show', license %></td>
         <td><%= link_to 'Edit', edit_license_path(license) %></td>
         <td><%= link_to 'Destroy', license, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Choose Departments', departmentlicenses_path %></td>
       </tr>
     <% end %>
   </tbody>

@@ -2,7 +2,7 @@
 
 <h1>Listing Departmentlessons</h1>
 
-<table>
+<table class="table">
   <thead>
     <tr>
       <th>Hour amount</th>
@@ -16,8 +16,8 @@
     <% @departmentlessons.each do |departmentlesson| %>
       <tr>
         <td><%= departmentlesson.hour_amount %></td>
-        <td><%= departmentlesson.lesson %></td>
-        <td><%= departmentlesson.departmentlicense %></td>
+        <td><%= departmentlesson.lesson.name %></td>
+        <td><%= departmentlesson.departmentlicense.department.name+ " "+departmentlesson.departmentlicense.license.name %></td>
         <td><%= link_to 'Show', departmentlesson %></td>
         <td><%= link_to 'Edit', edit_departmentlesson_path(departmentlesson) %></td>
         <td><%= link_to 'Destroy', departmentlesson, method: :delete, data: { confirm: 'Are you sure?' } %></td>

@@ -5,6 +5,7 @@ class DepartmentlicensesController < ApplicationController
   # GET /departmentlicenses.json
   def index
     @departmentlicenses = Departmentlicense.all
+    @departmentlicense = Departmentlicense.new
   end
 
   # GET /departmentlicenses/1

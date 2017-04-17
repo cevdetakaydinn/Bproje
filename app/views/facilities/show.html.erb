@@ -3,11 +3,17 @@
 <p>
   <strong>Name:</strong>
   <%= @facility.name %>
+  <h2>Fakülteler</h2>
+  <ul>
+  <% @facility.departments.each do |department| %>
+  <li><%= link_to department.name,department_path(department)%></li>
+  <%end%>
+  </ul>
 </p>
 
 <p>
   <strong>University:</strong>
-  <%= @facility.university %>
+  <%= @facility.university.name %>
 </p>
 
 <%= link_to 'Edit', edit_facility_path(@facility) %> |

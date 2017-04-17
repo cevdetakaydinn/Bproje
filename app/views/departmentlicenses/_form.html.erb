@@ -1,4 +1,4 @@
-<%= form_for(@departmentlicense) do |f| %>
+<%= simple_form_for @departmentlicense do |f| %>
   <% if @departmentlicense.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@departmentlicense.errors.count, "error") %> prohibited this departmentlicense from being saved:</h2>
@@ -12,22 +12,18 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :year %><br>
-    <%= f.number_field :year %>
+    <%= f.input :year %><br>
   </div>
   <div class="field">
-    <%= f.label :has_night %><br>
-    <%= f.check_box :has_night %>
+    <%= f.input :has_night %><br>
   </div>
   <div class="field">
-    <%= f.label :department_id %><br>
-    <%= f.text_field :department_id %>
+    <%= f.input :department_id %><br>
   </div>
   <div class="field">
-    <%= f.label :license_id %><br>
-    <%= f.text_field :license_id %>
+    <%= f.input :license_id %><br>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.button :submit %>
   </div>
 <% end %>
