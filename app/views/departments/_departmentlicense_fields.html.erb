@@ -1,0 +1,7 @@
+<div class='nested-fields'>
+    <%= f.input :year %>
+    <%= f.input :has_night %>
+    <%= f.select :department_id, Department.all.map { |l| [l.name, l.id, { class: l.id }] }, include_blank: true, label: false%><br>
+    <%= f.select :license_id, License.all.map { |l| [l.name, l.id, { class: l.id }] }, include_blank: true, label: false%><br>
+    <%= link_to_remove_association "remove departmentlicense", f %>
+</div>

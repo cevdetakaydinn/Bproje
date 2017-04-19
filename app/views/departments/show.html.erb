@@ -9,6 +9,12 @@
   <strong>Facility:</strong>
   <%= @department.facility.name %>
 </p>
-
+<p>
+  <strong>Licenses:</strong>
+  <%@department.departmentlicenses.each do |x| %>
+    <%=x.license.name%>
+  <%end%>
+</p>
+<%= link_to 'Add Lessons to this Department', departmentlessons_path(:department => @department.id) %>
 <%= link_to 'Edit', edit_department_path(@department) %> |
 <%= link_to 'Back', departments_path %>

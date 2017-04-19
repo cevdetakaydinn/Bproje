@@ -1,13 +1,41 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Listing Departmentlessons</h1>
+<h1>Listing Department lessons</h1>
+<%if(params.has_key?(:department))%>
+  <%=@department=Department.find(params[:department])%>
+  <table class="table sortable">
+    <thead>
+      <tr>
+        <th>Hour amount</th>
+        <th>Lesson</th>
+        <th>License Type</th>
+        <th colspan="3"></th>
+      </tr>
+    </thead>
 
-<table class="table">
+    <tbody>
+      <% @department.departmentlicenses.each do |x|%>
+        <%x.departmentlessons.each do |departmentlesson| %>
+        <tr>
+          <td><%= departmentlesson.hour_amount %></td>
+          <td><%= departmentlesson.lesson.name %></td>
+          <td><%=departmentlesson.departmentlicense.license.name %></td>
+          <td><%= link_to 'Show', departmentlesson %></td>
+          <td><%= link_to 'Edit', edit_departmentlesson_path(departmentlesson) %></td>
+          <td><%= link_to 'Destroy', departmentlesson, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+        <%end%>
+      <% end %>
+    </tbody>
+  </table>
+<%else%>
+<table class="table sortable">
   <thead>
     <tr>
       <th>Hour amount</th>
       <th>Lesson</th>
-      <th>Departmentlicense</th>
+      <th>Department</th>
+      <th>License Type</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -17,7 +45,8 @@
       <tr>
         <td><%= departmentlesson.hour_amount %></td>
         <td><%= departmentlesson.lesson.name %></td>
-        <td><%= departmentlesson.departmentlicense.department.name+ " "+departmentlesson.departmentlicense.license.name %></td>
+        <td><%= departmentlesson.departmentlicense.department.name %></td>
+        <td><%=departmentlesson.departmentlicense.license.name %></td>
         <td><%= link_to 'Show', departmentlesson %></td>
         <td><%= link_to 'Edit', edit_departmentlesson_path(departmentlesson) %></td>
         <td><%= link_to 'Destroy', departmentlesson, method: :delete, data: { confirm: 'Are you sure?' } %></td>
@@ -25,7 +54,9 @@
     <% end %>
   </tbody>
 </table>
+<%end%>
+
 
 <br>
 
-<%= link_to 'New Departmentlesson', new_departmentlesson_path %>
+<%= link_to 'New Department lesson', new_departmentlesson_path %>

@@ -2,7 +2,7 @@
 
 <h1>Listing Lessons</h1>
 
-<table>
+<table class="table sortable">
   <thead>
     <tr>
       <th>Name</th>
@@ -16,7 +16,6 @@
         <td><%= lesson.name %></td>
         <td><%= link_to 'Show', lesson %></td>
         <td><%= link_to 'Edit', edit_lesson_path(lesson) %></td>
-        <td><%= link_to 'Add to Department', departmentlessons_path(lesson) %></td>
         <td><%= link_to 'Destroy', lesson, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
