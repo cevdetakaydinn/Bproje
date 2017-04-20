@@ -14,7 +14,7 @@
 ActiveRecord::Schema.define(version: 20170417092043) do
 
   create_table "academicterms", force: :cascade do |t|
-    t.integer  "term"
+    t.string   "term"
     t.integer  "year"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -49,15 +49,15 @@ ActiveRecord::Schema.define(version: 20170417092043) do
   add_index "classrooms", ["department_id"], name: "index_classrooms_on_department_id"
 
   create_table "curriculums", force: :cascade do |t|
-    t.integer  "departmentlessons_id"
+    t.integer  "departmentlesson_id"
     t.integer  "academicterm_id"
     t.integer  "instructor_id"
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
   end
 
   add_index "curriculums", ["academicterm_id"], name: "index_curriculums_on_academicterm_id"
-  add_index "curriculums", ["departmentlessons_id"], name: "index_curriculums_on_departmentlessons_id"
+  add_index "curriculums", ["departmentlesson_id"], name: "index_curriculums_on_departmentlesson_id"
   add_index "curriculums", ["instructor_id"], name: "index_curriculums_on_instructor_id"
 
   create_table "days", force: :cascade do |t|

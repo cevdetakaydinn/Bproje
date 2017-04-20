@@ -12,9 +12,9 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :term %><br>
-    <%= f.number_field :term %>
+    <%= f.select :term, :collection => Academicterm::TERMHASH.invert.sort %>
   </div>
+
   <div class="field">
     <%= f.label :year %><br>
     <%= f.number_field :year %>

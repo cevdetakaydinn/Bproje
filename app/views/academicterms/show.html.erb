@@ -2,7 +2,14 @@
 
 <p>
   <strong>Term:</strong>
-  <%= @academicterm.term %>
+  <%=@academicterm.term%>
+  <% if(@academicterm.term==0) %>
+    Güz
+  <%elsif(@academicterm.term==1)%>
+    Bahar
+  <%elsif(@academicterm.term==2)%>
+    Yaz
+  <%end%>
 </p>
 
 <p>

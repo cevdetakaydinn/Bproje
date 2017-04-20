@@ -1,7 +1,7 @@
 class CreateAcademicterms < ActiveRecord::Migration
   def change
     create_table :academicterms do |t|
-      t.integer :term
+      t.string :term
       t.integer :year
 
       t.timestamps null: false

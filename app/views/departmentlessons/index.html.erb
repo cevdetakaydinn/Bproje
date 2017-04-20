@@ -23,11 +23,13 @@
           <td><%= link_to 'Show', departmentlesson %></td>
           <td><%= link_to 'Edit', edit_departmentlesson_path(departmentlesson) %></td>
           <td><%= link_to 'Destroy', departmentlesson, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <td><%= link_to 'Add to Curriculum', new_curriculum_path(:departmentlesson => departmentlesson) %></td>
         </tr>
         <%end%>
       <% end %>
     </tbody>
   </table>
+  <%= link_to 'Create New Curriculum', curriculums_path(:department => @department.id) %>
 <%else%>
 <table class="table sortable">
   <thead>

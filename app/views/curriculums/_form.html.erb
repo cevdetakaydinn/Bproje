@@ -1,4 +1,6 @@
-<%= form_for(@curriculum) do |f| %>
+<%@dl=Departmentlesson.find(params[:departmentlesson])%>
+<b>Current Lesson:</b><%=@dl.lesson.name%>
+<%= simple_form_for @curriculum do |f| %>
   <% if @curriculum.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@curriculum.errors.count, "error") %> prohibited this curriculum from being saved:</h2>
@@ -12,18 +14,15 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :departmentlessons_id %><br>
-    <%= f.text_field :departmentlessons_id %>
+    <%= f.hidden_field :departmentlesson_id, :value => @dl.id %>
   </div>
   <div class="field">
-    <%= f.label :academicterm_id %><br>
-    <%= f.text_field :academicterm_id %>
+      <b>Academic Term:</b><%= f.select :academicterm_id, Academicterm.all.map { |l| [l.year.to_s+" "+l.term, l.id, { class: l.id }] }, include_blank: true%>
   </div>
   <div class="field">
-    <%= f.label :instructor_id %><br>
-    <%= f.text_field :instructor_id %>
+    <b>Instructor:</b><%= f.select :instructor_id, Instructor.all.map { |l| [l.name+" "+l.surname, l.id, { class: l.id }] }, include_blank: true%>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.button :submit %>
   </div>
 <% end %>

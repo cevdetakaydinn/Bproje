@@ -1,8 +1,8 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Listing Academicterms</h1>
+<h1>Listing Academic terms</h1>
 
-<table>
+<table class="table sortable">
   <thead>
     <tr>
       <th>Term</th>
@@ -14,7 +14,10 @@
   <tbody>
     <% @academicterms.each do |academicterm| %>
       <tr>
-        <td><%= academicterm.term %></td>
+        <td>
+          <%=academicterm.term%>
+
+        </td>
         <td><%= academicterm.year %></td>
         <td><%= link_to 'Show', academicterm %></td>
         <td><%= link_to 'Edit', edit_academicterm_path(academicterm) %></td>

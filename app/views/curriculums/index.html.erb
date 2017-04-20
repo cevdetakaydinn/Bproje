@@ -1,7 +1,7 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Listing Curriculums</h1>
-
+<h1>Listing Cirruculum</h1>
+<%=@department=Department.find(params[:department])%>
 <table>
   <thead>
     <tr>
@@ -15,9 +15,9 @@
   <tbody>
     <% @curriculums.each do |curriculum| %>
       <tr>
-        <td><%= curriculum.departmentlessons %></td>
+        <td><%= curriculum.departmentlesson%></td>
         <td><%= curriculum.academicterm %></td>
-        <td><%= curriculum.instructor %></td>
+        <td><%= curriculum.instructor.name %></td>
         <td><%= link_to 'Show', curriculum %></td>
         <td><%= link_to 'Edit', edit_curriculum_path(curriculum) %></td>
         <td><%= link_to 'Destroy', curriculum, method: :delete, data: { confirm: 'Are you sure?' } %></td>
@@ -28,4 +28,4 @@
 
 <br>
 
-<%= link_to 'New Curriculum', new_curriculum_path %>
+<%= link_to 'Add new Lesson', new_curriculum_path(:department => @department.id,:license=>@license) %>
