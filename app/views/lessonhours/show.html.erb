@@ -2,12 +2,12 @@
 
 <p>
   <strong>Beginning:</strong>
-  <%= @lessonhour.beginning %>
+  <%= @lessonhour.beginning.strftime("%I:%M%p") %>
 </p>
 
 <p>
   <strong>Ending:</strong>
-  <%= @lessonhour.ending %>
+  <%= @lessonhour.ending.strftime("%I:%M%p") %>
 </p>
 
 <%= link_to 'Edit', edit_lessonhour_path(@lessonhour) %> |

@@ -24,9 +24,9 @@
         <td><%= instructor.rank %></td>
         <td><%= instructor.email %></td>
         <td><%= instructor.password %></td>
-        <td><%= link_to 'Show', instructor %></td>
-        <td><%= link_to 'Edit', edit_instructor_path(instructor) %></td>
-        <td><%= link_to 'Destroy', instructor, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', instructor,class:"btn btn-success" %></td>
+        <td><%= link_to 'Edit', edit_instructor_path(instructor),class:"btn btn-warning" %></td>
+        <td><%= link_to 'Destroy', instructor, method: :delete, data: { confirm: 'Are you sure?' } ,class:"btn btn-danger"%></td>
       </tr>
     <% end %>
   </tbody>
@@ -34,4 +34,4 @@
 
 <br>
 
-<%= link_to 'New Instructor', new_instructor_path %>
+<%= link_to 'New Instructor', new_instructor_path,class:"btn btn-primary"%>

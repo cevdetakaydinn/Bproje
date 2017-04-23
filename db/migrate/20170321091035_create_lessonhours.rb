@@ -1,8 +1,8 @@
 class CreateLessonhours < ActiveRecord::Migration
   def change
     create_table :lessonhours do |t|
-      t.datetime :beginning
-      t.datetime :ending
+      t.time :beginning
+      t.time :ending
 
       t.timestamps null: false
     end

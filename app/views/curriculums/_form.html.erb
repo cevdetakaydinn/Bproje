@@ -1,5 +1,6 @@
 <%@dl=Departmentlesson.find(params[:departmentlesson])%>
 <b>Current Lesson:</b><%=@dl.lesson.name%>
+
 <%= simple_form_for @curriculum do |f| %>
   <% if @curriculum.errors.any? %>
     <div id="error_explanation">
@@ -14,7 +15,7 @@
   <% end %>
 
   <div class="field">
-    <%= f.hidden_field :departmentlesson_id, :value => @dl.id %>
+    <%= f.input :departmentlesson_id %>
   </div>
   <div class="field">
       <b>Academic Term:</b><%= f.select :academicterm_id, Academicterm.all.map { |l| [l.year.to_s+" "+l.term, l.id, { class: l.id }] }, include_blank: true%>

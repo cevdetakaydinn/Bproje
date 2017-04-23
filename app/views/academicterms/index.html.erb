@@ -19,9 +19,9 @@
 
         </td>
         <td><%= academicterm.year %></td>
-        <td><%= link_to 'Show', academicterm %></td>
-        <td><%= link_to 'Edit', edit_academicterm_path(academicterm) %></td>
-        <td><%= link_to 'Destroy', academicterm, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', academicterm,class:"btn btn-success" %></td>
+        <td><%= link_to 'Edit', edit_academicterm_path(academicterm) ,class:"btn btn-warning"%></td>
+        <td><%= link_to 'Destroy', academicterm, method: :delete, data: { confirm: 'Are you sure?' } ,class:"btn btn-danger"%></td>
       </tr>
     <% end %>
   </tbody>
@@ -29,4 +29,4 @@
 
 <br>
 
-<%= link_to 'New Academicterm', new_academicterm_path %>
+<%= link_to 'New Academicterm', new_academicterm_path ,class:"btn btn-primary"%>

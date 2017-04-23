@@ -10,12 +10,28 @@
   <%= @department.facility.name %>
 </p>
 <p>
-  <strong>Licenses:</strong>
-  <%@department.departmentlicenses.each do |x| %>
-    <%=x.license.name%>
-  <%end%>
-</p>
-<%= link_to 'Add Lessons to this Department', departmentlessons_path(:department => @department.id) %>
+  <strong>Licenses:</strong></br>
+  <table class="table sortable">
+    <thead>
+      <tr>
+        <th>License</th>
+        <th>License Year Amount</th>
+        <th>License Has Night?</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%@department.departmentlicenses.each do |x| %>
+      <tr>
+          <td><%=x.license.name%></td>
+          <td><%=x.year%></br></td>
+          <td><%=x.has_night%></td>
+      </tr>
+      <%end%>
+    </tbody>
 
-<%= link_to 'Edit', edit_department_path(@department) %> |
-<%= link_to 'Back', departments_path %>
+  </table>
+
+</p>
+<%= link_to 'Manage Lessons', departmentlessons_path(:department => @department.id) ,class:"btn btn-info"%>
+
+<%= link_to 'Edit', edit_department_path(@department), class:"btn btn-warning"%>

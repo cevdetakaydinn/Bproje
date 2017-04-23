@@ -4,16 +4,18 @@
   <strong>Hour amount:</strong>
   <%= @departmentlesson.hour_amount %>
 </p>
-
+<p>
+  <strong>Grade:</strong>
+  <%= @departmentlesson.grade %>
+</p>
 <p>
   <strong>Lesson:</strong>
   <%= @departmentlesson.lesson.name %>
 </p>
 
 <p>
-  <strong>Departmentlicense:</strong>
+  <strong>Department and License:</strong>
   <%= @departmentlesson.departmentlicense.department.name+ " "+@departmentlesson.departmentlicense.license.name %>
 </p>
 
-<%= link_to 'Edit', edit_departmentlesson_path(@departmentlesson) %> |
-<%= link_to 'Back', departmentlessons_path %>
+<%= link_to 'Edit', edit_departmentlesson_path(@departmentlesson) %>

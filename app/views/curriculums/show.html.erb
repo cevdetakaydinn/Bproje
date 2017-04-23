@@ -1,19 +1,16 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Departmentlessons:</strong>
-  <%= @curriculum.departmentlessons %>
+  <strong>Lesson:</strong>
+  <%= @curriculum.departmentlesson.lesson.name %>
 </p>
 
 <p>
   <strong>Academicterm:</strong>
-  <%= @curriculum.academicterm %>
+  <%= @curriculum.academicterm.year.to_s+""+@curriculum.academicterm.term %>
 </p>
 
 <p>
   <strong>Instructor:</strong>
-  <%= @curriculum.instructor %>
+  <%= @curriculum.instructor.name+""+@curriculum.instructor.surname %>
 </p>
-
-<%= link_to 'Edit', edit_curriculum_path(@curriculum) %> |
-<%= link_to 'Back', curriculums_path %>

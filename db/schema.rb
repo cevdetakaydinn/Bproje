@@ -41,12 +41,12 @@ ActiveRecord::Schema.define(version: 20170417092043) do
   create_table "classrooms", force: :cascade do |t|
     t.integer  "number"
     t.integer  "size"
-    t.integer  "department_id"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.integer  "facility_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
-  add_index "classrooms", ["department_id"], name: "index_classrooms_on_department_id"
+  add_index "classrooms", ["facility_id"], name: "index_classrooms_on_facility_id"
 
   create_table "curriculums", force: :cascade do |t|
     t.integer  "departmentlesson_id"
@@ -61,13 +61,14 @@ ActiveRecord::Schema.define(version: 20170417092043) do
   add_index "curriculums", ["instructor_id"], name: "index_curriculums_on_instructor_id"
 
   create_table "days", force: :cascade do |t|
-    t.integer  "day"
+    t.string   "day"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "departmentlessons", force: :cascade do |t|
     t.integer  "hour_amount"
+    t.integer  "grade"
     t.integer  "lesson_id"
     t.integer  "departmentlicense_id"
     t.datetime "created_at",           null: false
@@ -120,8 +121,8 @@ ActiveRecord::Schema.define(version: 20170417092043) do
   end
 
   create_table "lessonhours", force: :cascade do |t|
-    t.datetime "beginning"
-    t.datetime "ending"
+    t.time     "beginning"
+    t.time     "ending"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

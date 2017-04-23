@@ -28,7 +28,7 @@ class DepartmentlessonsController < ApplicationController
 
     respond_to do |format|
       if @departmentlesson.save
-        format.html { redirect_to @departmentlesson, notice: 'Departmentlesson was successfully created.' }
+        format.html { redirect_to @departmentlesson, notice: 'Department lesson was successfully created.' }
         format.json { render :show, status: :created, location: @departmentlesson }
       else
         format.html { render :new }
@@ -42,7 +42,7 @@ class DepartmentlessonsController < ApplicationController
   def update
     respond_to do |format|
       if @departmentlesson.update(departmentlesson_params)
-        format.html { redirect_to @departmentlesson, notice: 'Departmentlesson was successfully updated.' }
+        format.html { redirect_to @departmentlesson, notice: 'Department lesson was successfully updated.' }
         format.json { render :show, status: :ok, location: @departmentlesson }
       else
         format.html { render :edit }
@@ -56,7 +56,7 @@ class DepartmentlessonsController < ApplicationController
   def destroy
     @departmentlesson.destroy
     respond_to do |format|
-      format.html { redirect_to departmentlessons_url, notice: 'Departmentlesson was successfully destroyed.' }
+      format.html { redirect_to departmentlessons_url, notice: 'Department lesson was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -69,6 +69,6 @@ class DepartmentlessonsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def departmentlesson_params
-      params.require(:departmentlesson).permit(:hour_amount, :lesson_id, :departmentlicense_id)
+      params.require(:departmentlesson).permit(:departmentlicense_id, :hour_amount, :lesson_id,:grade)
     end
 end

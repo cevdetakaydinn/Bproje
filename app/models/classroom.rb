@@ -1,3 +1,3 @@
 class Classroom < ActiveRecord::Base
-  belongs_to :department
+  belongs_to :facility
 end

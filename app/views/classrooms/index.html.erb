@@ -2,12 +2,12 @@
 
 <h1>Listing Classrooms</h1>
 
-<table>
+<table class="table">
   <thead>
     <tr>
       <th>Number</th>
       <th>Size</th>
-      <th>Department</th>
+      <th>Facility</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -17,10 +17,10 @@
       <tr>
         <td><%= classroom.number %></td>
         <td><%= classroom.size %></td>
-        <td><%= classroom.department %></td>
-        <td><%= link_to 'Show', classroom %></td>
-        <td><%= link_to 'Edit', edit_classroom_path(classroom) %></td>
-        <td><%= link_to 'Destroy', classroom, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= classroom.facility.name %></td>
+        <td><%= link_to 'Show', classroom ,class:"btn btn-success"%></td>
+        <td><%= link_to 'Edit', edit_classroom_path(classroom),class:"btn btn-warning" %></td>
+        <td><%= link_to 'Destroy', classroom, method: :delete, data: { confirm: 'Are you sure?' } ,class:"btn btn-danger"%></td>
       </tr>
     <% end %>
   </tbody>
@@ -28,4 +28,4 @@
 
 <br>
 
-<%= link_to 'New Classroom', new_classroom_path %>
+<%= link_to 'New Classroom', new_classroom_path ,class:"btn btn-primary"%>

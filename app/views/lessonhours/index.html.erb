@@ -2,7 +2,7 @@
 
 <h1>Listing Lessonhours</h1>
 
-<table>
+<table class="table sortable">
   <thead>
     <tr>
       <th>Beginning</th>
@@ -14,11 +14,11 @@
   <tbody>
     <% @lessonhours.each do |lessonhour| %>
       <tr>
-        <td><%= lessonhour.beginning %></td>
-        <td><%= lessonhour.ending %></td>
-        <td><%= link_to 'Show', lessonhour %></td>
-        <td><%= link_to 'Edit', edit_lessonhour_path(lessonhour) %></td>
-        <td><%= link_to 'Destroy', lessonhour, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= lessonhour.beginning.strftime("%I:%M%p") %></td>
+        <td><%= lessonhour.ending.strftime("%I:%M%p") %></td>
+        <td><%= link_to 'Show', lessonhour ,class:"btn btn-success"%></td>
+        <td><%= link_to 'Edit', edit_lessonhour_path(lessonhour),class:"btn btn-warning" %></td>
+        <td><%= link_to 'Destroy', lessonhour, method: :delete, data: { confirm: 'Are you sure?' } ,class:"btn btn-danger"%></td>
       </tr>
     <% end %>
   </tbody>
@@ -26,4 +26,4 @@
 
 <br>
 
-<%= link_to 'New Lessonhour', new_lessonhour_path %>
+<%= link_to 'New Lessonhour', new_lessonhour_path,class:"btn btn-primary" %>

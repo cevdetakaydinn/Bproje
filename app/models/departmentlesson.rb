@@ -1,5 +1,5 @@
 class Departmentlesson < ActiveRecord::Base
   belongs_to :lesson
   belongs_to :departmentlicense
-  has_many :curriculums
+  has_many :curriculums, dependent: :destroy
 end

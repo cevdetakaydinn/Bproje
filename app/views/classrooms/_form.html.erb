@@ -1,4 +1,4 @@
-<%= form_for(@classroom) do |f| %>
+<%= simple_form_for @classroom do |f| %>
   <% if @classroom.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@classroom.errors.count, "error") %> prohibited this classroom from being saved:</h2>
@@ -12,18 +12,15 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :number %><br>
-    <%= f.number_field :number %>
+    <%= f.input :number %><br>
   </div>
   <div class="field">
-    <%= f.label :size %><br>
-    <%= f.number_field :size %>
+    <%= f.input :size %><br>
   </div>
   <div class="field">
-    <%= f.label :department_id %><br>
-    <%= f.text_field :department_id %>
+    <%= f.input :facility_id %><br>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.button :submit %>
   </div>
 <% end %>
