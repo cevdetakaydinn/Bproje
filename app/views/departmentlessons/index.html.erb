@@ -2,7 +2,6 @@
 
 
 <%if(params.has_key?(:department))%>
-<%@department=Department.find(params[:department])%>
 <h1>Listing lessons for <%=@department.name%></h1>
 
   <table class="table sortable">
@@ -17,7 +16,7 @@
     </thead>
 
     <tbody>
-      <% @department.departmentlicenses.each do |x|%>
+      <% @departmentlicenses.each do |x|%>
         <%x.departmentlessons.each do |departmentlesson| %>
         <tr>
           <td><%= departmentlesson.lesson.name %></td>

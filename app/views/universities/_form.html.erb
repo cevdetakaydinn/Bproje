@@ -19,9 +19,10 @@
       <%= render 'facility_fields', :f => facility %>
     <% end %>
     <div class='links'>
-      <%= link_to_add_association 'add facility', f, :facilities %>
+      <%= link_to_add_association 'add facility', f, :facilities ,class:"btn btn-info"%>
     </div>
   </div>
+  </br>
   <div class="actions">
     <%= f.button :submit %>
   </div>

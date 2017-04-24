@@ -1,36 +1,40 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Listing Cirruculum</h1>
-<%@department=Department.find(params[:department])%>
-<table class="table sortable">
-  <thead>
-    <tr>
-      <th>Lesson</th>
-      <th>Academicterm</th>
-      <th>Instructor</th>
-      <th>Grade</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<%if(params.has_key?(:department))%>
+  <%@department=Department.find(params[:department])%>
+  <table class="table sortable">
+    <thead>
+      <tr>
+        <th>Lesson</th>
+        <th>Academicterm</th>
+        <th>Instructor</th>
+        <th>Grade</th>
+        <th colspan="3"></th>
+      </tr>
+    </thead>
 
-  <tbody>
-    <%@department.departmentlicenses.each do |dlic|%>
-      <%dlic.departmentlessons.each do |dles|%>
-        <%dles.curriculums.each do |curriculum|%>
-          <tr>
-            <td><%= curriculum.departmentlesson.lesson.name%></td>
-            <td><%= curriculum.academicterm.year.to_s+" "+curriculum.academicterm.term %></td>
-            <td><%= curriculum.instructor.name %></td>
-            <td><%=curriculum.departmentlesson.grade%></td>
-            <td><%= link_to 'Show', curriculum %></td>
-            <td><%= link_to 'Edit', edit_curriculum_path(curriculum) %></td>
-            <td><%= link_to 'Destroy', curriculum, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-          </tr>
+    <tbody>
+      <%@department.departmentlicenses.each do |dlic|%>
+        <%dlic.departmentlessons.each do |dles|%>
+          <%dles.curriculums.each do |curriculum|%>
+            <tr>
+              <td><%= curriculum.departmentlesson.lesson.name%></td>
+              <td><%= curriculum.academicterm.year.to_s+" "+curriculum.academicterm.term %></td>
+              <td><%= curriculum.instructor.name %></td>
+              <td><%=curriculum.departmentlesson.grade%></td>
+              <td><%= link_to 'Show', curriculum %></td>
+              <td><%= link_to 'Edit', edit_curriculum_path(curriculum) %></td>
+              <td><%= link_to 'Destroy', curriculum, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            </tr>
+          <%end%>
         <%end%>
       <%end%>
-    <%end%>
 
-  </tbody>
-</table>
+    </tbody>
+  </table>
 
-<br>
+  <br>
+<%else%>
+  Yapılacak
+<%end%>

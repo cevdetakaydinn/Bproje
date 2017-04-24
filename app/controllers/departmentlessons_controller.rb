@@ -5,6 +5,10 @@ class DepartmentlessonsController < ApplicationController
   # GET /departmentlessons.json
   def index
     @departmentlessons = Departmentlesson.all
+    if(params.has_key?(:department))
+      @department=Department.find(params[:department])
+      @departmentlicenses=@department.departmentlicenses
+    end
   end
 
   # GET /departmentlessons/1

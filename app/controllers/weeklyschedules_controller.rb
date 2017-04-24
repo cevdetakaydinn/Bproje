@@ -20,7 +20,8 @@ class WeeklyschedulesController < ApplicationController
   # GET /weeklyschedules/1/edit
   def edit
   end
-
+  def listSchedules
+  end
   # POST /weeklyschedules
   # POST /weeklyschedules.json
   def create
