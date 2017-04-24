@@ -18,6 +18,10 @@ class DeviseCreateAdmins < ActiveRecord::Migration
       t.datetime :last_sign_in_at
       t.string   :current_sign_in_ip
       t.string   :last_sign_in_ip
+      t.string :name
+      t.string :surname
+      t.integer :id_number, :limit => 5
+      t.integer :rank
 
       ## Confirmable
       # t.string   :confirmation_token

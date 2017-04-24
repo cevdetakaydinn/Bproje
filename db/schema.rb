@@ -21,18 +21,22 @@ ActiveRecord::Schema.define(version: 20170417092043) do
   end
 
   create_table "admins", force: :cascade do |t|
-    t.string   "email",                  default: "", null: false
-    t.string   "encrypted_password",     default: "", null: false
+    t.string   "email",                            default: "", null: false
+    t.string   "encrypted_password",               default: "", null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,  null: false
+    t.integer  "sign_in_count",                    default: 0,  null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
+    t.string   "name"
+    t.string   "surname"
+    t.integer  "id_number",              limit: 5
+    t.integer  "rank"
+    t.datetime "created_at",                                    null: false
+    t.datetime "updated_at",                                    null: false
   end
 
   add_index "admins", ["email"], name: "index_admins_on_email", unique: true
@@ -51,14 +55,14 @@ ActiveRecord::Schema.define(version: 20170417092043) do
   create_table "curriculums", force: :cascade do |t|
     t.integer  "departmentlesson_id"
     t.integer  "academicterm_id"
-    t.integer  "instructor_id"
+    t.integer  "admin_id"
     t.datetime "created_at",          null: false
     t.datetime "updated_at",          null: false
   end
 
   add_index "curriculums", ["academicterm_id"], name: "index_curriculums_on_academicterm_id"
+  add_index "curriculums", ["admin_id"], name: "index_curriculums_on_admin_id"
   add_index "curriculums", ["departmentlesson_id"], name: "index_curriculums_on_departmentlesson_id"
-  add_index "curriculums", ["instructor_id"], name: "index_curriculums_on_instructor_id"
 
   create_table "days", force: :cascade do |t|
     t.string   "day"
@@ -108,17 +112,6 @@ ActiveRecord::Schema.define(version: 20170417092043) do
   end
 
   add_index "facilities", ["university_id"], name: "index_facilities_on_university_id"
-
-  create_table "instructors", force: :cascade do |t|
-    t.string   "name"
-    t.string   "surname"
-    t.integer  "id_number"
-    t.integer  "rank"
-    t.string   "email"
-    t.string   "password"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
 
   create_table "lessonhours", force: :cascade do |t|
     t.time     "beginning"

@@ -21,7 +21,7 @@
       <b>Academic Term:</b><%= f.select :academicterm_id, Academicterm.all.map { |l| [l.year.to_s+" "+l.term, l.id, { class: l.id }] }, include_blank: true%>
   </div>
   <div class="field">
-    <b>Instructor:</b><%= f.select :instructor_id, Instructor.all.map { |l| [l.name+" "+l.surname, l.id, { class: l.id }] }, include_blank: true%>
+    <b>Instructor:</b><%= f.select :admin_id, Admin.all.map { |l| [l.name+" "+l.surname, l.id, { class: l.id }] }, include_blank: true%>
   </div>
   <div class="actions">
     <%= f.button :submit %>

@@ -20,6 +20,17 @@ class WeeklyschedulesController < ApplicationController
   # GET /weeklyschedules/1/edit
   def edit
   end
+
+  def listFacilities
+    @facilities=Facility.where(university_id: params[:university_id])
+    render :json => @facilities
+  end
+
+  def listDepartments
+    @departments=Department.where(facility_id: params[:facility_id])
+    render :json => @departments
+  end
+
   def listSchedules
   end
   # POST /weeklyschedules

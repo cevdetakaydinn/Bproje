@@ -1,10 +1,14 @@
 Rails.application.routes.draw do
-  devise_for :admins
+  devise_for :admins, controllers: {
+  sessions: 'admins/sessions',
+  registrations: 'admins/registrations'
+  }
+  get 'weeklyschedules/listFacilities', to: "weeklyschedules#listFacilities"
+  get 'weeklyschedules/listDepartments', to: "weeklyschedules#listDepartments"
   resources :weeklyschedules
   resources :lessonhours
   resources :days
   resources :curriculums
-  resources :instructors
   resources :departmentlessons
   resources :lessons
   resources :academicterms
@@ -17,6 +21,13 @@ Rails.application.routes.draw do
   root to: "home#index"
   post 'listSchedules', to: "weeklyschedules#listSchedules"
   get 'listSchedules', to: "weeklyschedules#listSchedules"
+  get 'instructors', to: "admins/instructors#index"
+  delete 'instructors', to: "admins/instructors#destroy"
+  post 'instructors', to: "admins/instructors#create"
+  patch 'instructors', to: "admins/instructors#update"
+  get 'instructors/edit', to: "admins/instructors#edit"
+  get 'instructors/new', to: "admins/instructors#new"
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

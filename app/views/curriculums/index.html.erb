@@ -21,7 +21,7 @@
             <tr>
               <td><%= curriculum.departmentlesson.lesson.name%></td>
               <td><%= curriculum.academicterm.year.to_s+" "+curriculum.academicterm.term %></td>
-              <td><%= curriculum.instructor.name %></td>
+              <td><%= curriculum.admin.name %></td>
               <td><%=curriculum.departmentlesson.grade%></td>
               <td><%= link_to 'Show', curriculum %></td>
               <td><%= link_to 'Edit', edit_curriculum_path(curriculum) %></td>

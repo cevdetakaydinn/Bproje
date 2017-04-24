@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Instructors</h1>
+
+<table class="table sortable">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Surname</th>
+      <th>Id number</th>
+      <th>Rank</th>
+      <th>Email</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @admins.each do |admin| %>
+      <tr>
+        <td><%= admin.name %></td>
+        <td><%= admin.surname %></td>
+        <td><%= admin.id_number %></td>
+        <td><%= admin.rank %></td>
+        <td><%= admin.email %></td>
+        <td><%= link_to 'Edit', instructors_edit_path(:id => admin.id),class:"btn btn-warning" %></td>
+        <td><%= link_to 'Destroy', instructors_path(:id => admin.id), method: :delete, data: { confirm: 'Are you sure?' } ,class:"btn btn-danger"%></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Instructor', instructors_new_path,class:"btn btn-primary"%>
