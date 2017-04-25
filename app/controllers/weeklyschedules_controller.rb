@@ -33,6 +33,19 @@ class WeeklyschedulesController < ApplicationController
 
   def listSchedules
   end
+
+  def generateSchedule
+    #Libdeki populasyon sınıfını kullanarak oluşturma işini yapıcak
+  end
+
+  def saveSchedule
+    #oluşturlan en iyi ders programını veritabanına kaydedicek
+  end
+
+  def getSchedule
+    #gerekli bilgileri alıp (department,academicterm) view de göstermek için gönderecek
+  end
+
   # POST /weeklyschedules
   # POST /weeklyschedules.json
   def create
