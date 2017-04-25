@@ -5,6 +5,14 @@ class WeeklyschedulesController < ApplicationController
   # GET /weeklyschedules.json
   def index
     @weeklyschedules = Weeklyschedule.all
+    @array=Array.new(7) { Array.new(5) }
+    @array = [
+      ["fizik","fizik","fizik","","Matematik","Matematik","kimya"],
+      ["","","","","Programlamaya Giriş","Programlamaya Giriş","Programlamaya Giriş"],
+      ["","","","","","",""],
+      ["","","","","","",""],
+      ["","","","","","",""]
+    ]
   end
 
   # GET /weeklyschedules/1
@@ -44,6 +52,7 @@ class WeeklyschedulesController < ApplicationController
 
   def getSchedule
     #gerekli bilgileri alıp (department,academicterm) view de göstermek için gönderecek
+    #dummy for now
   end
 
   # POST /weeklyschedules
