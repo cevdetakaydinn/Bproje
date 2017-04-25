@@ -11,7 +11,8 @@ class Population
     @matingPool=Array.new
     @generations=0
   end
-  #bütün populasyonun fitnessini hesapla
+
+  #bütün populasyonun fitnesslerini hesapla
   def calcFitness
     i=0
     @population.each do |pop|

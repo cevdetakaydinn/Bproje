@@ -22,10 +22,10 @@
       <%= render 'department_fields', :f => department %>
     <% end %>
     <div class='links'>
-      <%= link_to_add_association 'add department', f, :departments %>
+      <%= link_to_add_association 'add department', f, :departments ,class:"btn btn-primary"%>
     </div>
   </div>
-
+  </br>
   <div class="actions">
     <%= f.button :submit %>
   </div>

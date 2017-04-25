@@ -1,4 +1,4 @@
-<%= form_for(@weeklyschedule) do |f| %>
+<%= simple_form_for @weeklyschedule do |f| %>
   <% if @weeklyschedule.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@weeklyschedule.errors.count, "error") %> prohibited this weeklyschedule from being saved:</h2>
@@ -12,22 +12,18 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :lessonhours_id %><br>
-    <%= f.text_field :lessonhours_id %>
+    <%= f.input :lessonhours_id %><br>
   </div>
   <div class="field">
-    <%= f.label :day_id %><br>
-    <%= f.text_field :day_id %>
+    <%= f.input :day_id %><br>
   </div>
   <div class="field">
-    <%= f.label :curriculum_id %><br>
-    <%= f.text_field :curriculum_id %>
+    <%= f.input :curriculum_id %><br>
   </div>
   <div class="field">
-    <%= f.label :classroom_id %><br>
-    <%= f.text_field :classroom_id %>
+    <%= f.input :classroom_id %><br>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.button :submit %>
   </div>
 <% end %>

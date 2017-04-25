@@ -18,7 +18,7 @@
     <%= f.input :size %><br>
   </div>
   <div class="field">
-    <%= f.input :facility_id %><br>
+    <b>Facility</b><%= f.select :facility_id, Facility.all.map { |l| [l.university.name+" "+l.name, l.id, { class: l.id }] }, include_blank: true%><br>
   </div>
   <div class="actions">
     <%= f.button :submit %>

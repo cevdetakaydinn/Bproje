@@ -52,8 +52,22 @@ class WeeklyschedulesController < ApplicationController
     @departmentlessons.each do |dLesson|
       @curriculum.append(Curriculum.where(departmentlesson_id: dLesson ,academicterm: @academicterm))
     end
-    #currentl showing only lessong belonging to single department , license and academicterm
-    render :json => @curriculum
+    @weeklySch=Array.new
+
+    @curriculum.each do |cur|
+        @weeklySch<<Weeklyschedule.where(curriculum_id: cur)
+    end
+    @array=Array.new(Lessonhour.all.size+1) { |k| Array.new(Day.all.size) { |k| "" }}
+    @weeklySch.each do |x|
+      x.each do |y|
+        @array[y[:lessonhours_id]][y[:day_id]]=y
+
+      end
+    end
+    @array.each_with_index.map do |_, index|
+      @array.map { |row| row[index] }
+    end
+    render :json => @array
   end
 
   def generateSchedule
