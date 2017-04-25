@@ -6,4 +6,9 @@ class Admin < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
   validates :id_number, presence: true, uniqueness: true, length: {is: 11}
   validates :name, :surname, :rank, presence: true
+  RANKHASH = {
+    1 => "Yar. Doç. Dr.",
+    2 => "Doç. Dr.",
+    3 => "Professor",
+  }
 end

@@ -5,6 +5,7 @@ class WeeklyschedulesController < ApplicationController
   # GET /weeklyschedules.json
   def index
     @weeklyschedules = Weeklyschedule.all
+    #dumy array
     @array=Array.new(7) { Array.new(5) }
     @array = [
       ["fizik","fizik","fizik","","Matematik","Matematik","kimya"],
@@ -40,6 +41,19 @@ class WeeklyschedulesController < ApplicationController
   end
 
   def listSchedules
+    @department=Department.where(id: params[:anything][:department]).limit(1)
+    @academicterm=Academicterm.where(id: params[:anything][:academicterm]).limit(1)
+    @license=License.where(id: params[:anything][:license]).limit(1)
+
+    @departmentlicense=Departmentlicense.where(department_id: @department, license_id: @license).limit(1)
+    @departmentlessons=Departmentlesson.where(departmentlicense_id: @departmentlicense)
+    @curriculum=Array.new
+
+    @departmentlessons.each do |dLesson|
+      @curriculum.append(Curriculum.where(departmentlesson_id: dLesson ,academicterm: @academicterm))
+    end
+    #currentl showing only lessong belonging to single department , license and academicterm
+    render :json => @curriculum
   end
 
   def generateSchedule

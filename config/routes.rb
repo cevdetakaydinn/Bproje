@@ -19,8 +19,8 @@ Rails.application.routes.draw do
   resources :facilities
   resources :universities
   root to: "home#index"
-  post 'listSchedules', to: "weeklyschedules#listSchedules"
-  get 'listSchedules', to: "weeklyschedules#listSchedules"
+  post 'weeklyschedules/listSchedules', to: "weeklyschedules#listSchedules"
+  get 'weeklyschedules/listSchedules', to: "weeklyschedules#listSchedules"
   get 'instructors', to: "admins/instructors#index"
   delete 'instructors', to: "admins/instructors#destroy"
   post 'instructors', to: "admins/instructors#create"

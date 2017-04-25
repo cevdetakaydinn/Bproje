@@ -6,6 +6,7 @@
         <b>University:</b><%= f.select :university, University.all.map { |l| [l.name, l.id, { class: l.id }] }, include_blank: true%><br>
         <b>Facility:</b><%= f.select :facility,{}%><br>
         <b>Department:</b><%= f.select :department, Department.all.map { |l| [l.name, l.id, { class: l.id }] }, include_blank: true%><br>
+        <b>License:</b><%= f.select :license, License.all.map { |l| [l.name, l.id, { class: l.id }] }, include_blank: true%><br>
         <b>AcademicTerm:</b><%= f.select :academicterm, Academicterm.all.map { |l| [l.year.to_s+" "+l.term, l.id, { class: l.id }] }, include_blank: true%>
         </br>
         <%= f.button :submit ,'Show Weeklyschedule',class:"btn btn-info"%>
@@ -15,7 +16,7 @@
 
 <div class="row">
   <div class="jumbotron">
-    <table class="table">
+    <table class="table table-bordered">
       <thead>
         <tr>
           <th>Time</th>
@@ -29,7 +30,7 @@
       <tbody>
         <%Lessonhour.all.each_with_index do |lh,index|%>
           <tr>
-              <td><%=lh.beginning.strftime("%I:%M%p")+"-"+lh.ending.strftime("%I:%M%p")%></td>
+              <td><b><%=lh.beginning.strftime("%I:%M%p")+"-"+lh.ending.strftime("%I:%M%p")%></b></td>
               <%@array.map{|a| a[index]}.each do |x|%>
               <td><%=x%></td>
               <%end%>

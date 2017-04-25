@@ -5,7 +5,7 @@
   <div class="form-inputs">
     <%= f.input :name, required: true, autofocus: true %>
     <%= f.input :surname, required: true%>
-    <%= f.input :rank, required: true%>
+    <%= f.input :rank, :collection => Admin::RANKHASH.invert.sort, required: true%>
     <%= f.input :id_number, required: true%>
     <%= f.input :email, required: true%>
     <%= f.input :password, autocomplete: "off", hint: "leave it blank if you don't want to change it", required: false %>
