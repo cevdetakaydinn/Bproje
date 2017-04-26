@@ -1,32 +1,36 @@
-<%= simple_form_for @facility do |f| %>
-  <% if @facility.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@facility.errors.count, "error") %> prohibited this facility from being saved:</h2>
+<div class="row">
+  <div class="jumbotron col-md-5">
+    <%= simple_form_for @facility do |f| %>
+      <% if @facility.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@facility.errors.count, "error") %> prohibited this facility from being saved:</h2>
 
-      <ul>
-      <% @facility.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
+          <ul>
+          <% @facility.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+          </ul>
+        </div>
       <% end %>
-      </ul>
-    </div>
-  <% end %>
 
-  <div class="field">
-    <%= f.input :name %><br>
-  </div>
-  <div class="field">
-    <%= f.input :university_id %><br>
-  </div>
-  <div id='departments'>
-    <%= f.simple_fields_for :departments do |department| %>
-      <%= render 'department_fields', :f => department %>
+      <div class="field">
+        <%= f.input :name %><br>
+      </div>
+      <div class="field">
+        <%= f.input :university_id %><br>
+      </div>
+      <div id='departments'>
+        <%= f.simple_fields_for :departments do |department| %>
+          <%= render 'department_fields', :f => department %>
+        <% end %>
+        <div class='links'>
+          <%= link_to_add_association 'add department', f, :departments ,class:"btn btn-primary"%>
+        </div>
+      </div>
+      </br>
+      <div class="actions">
+        <%= f.button :submit %>
+      </div>
     <% end %>
-    <div class='links'>
-      <%= link_to_add_association 'add department', f, :departments ,class:"btn btn-primary"%>
-    </div>
   </div>
-  </br>
-  <div class="actions">
-    <%= f.button :submit %>
-  </div>
-<% end %>
+</div>

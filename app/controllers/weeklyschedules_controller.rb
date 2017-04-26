@@ -8,11 +8,11 @@ class WeeklyschedulesController < ApplicationController
     #dumy array
     @array=Array.new(7) { Array.new(5) }
     @array = [
-      ["fizik","fizik","fizik","","Matematik","Matematik","kimya"],
+      ["fizik","fizik","fizik","","Matematik","Matematik",],
       ["","","","","Programlamaya Giriş","Programlamaya Giriş","Programlamaya Giriş"],
-      ["","","","","","",""],
-      ["","","","","","",""],
-      ["","","","","","",""]
+      ["","Ayrık Matematik","Ayrık Matematik","Ayrık Matematik","","",""],
+      ["","","","","Bilgisayar Mühendisliğine Giriş","Bilgisayar Mühendisliğine Giriş",""],
+      ["İngilizce","İngilizce","","","","",""]
     ]
   end
 

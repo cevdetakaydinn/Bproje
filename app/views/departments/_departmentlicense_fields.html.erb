@@ -4,5 +4,5 @@
     <b>License:</b><%= f.select :license_id, License.all.map { |l| [l.name, l.id, { class: l.id }] }, include_blank: true, label: false%><br>
     <%= f.input :year %>
     <%= f.input :has_night %>
-    <%= link_to_remove_association "remove departmentlicense", f %>
+    <%= link_to_remove_association "remove departmentlicense", f,class:"btn btn-warning" %>
 </div>

@@ -1,24 +1,30 @@
-<%= simple_form_for @academicterm do |f| %>
-  <% if @academicterm.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@academicterm.errors.count, "error") %> prohibited this academicterm from being saved:</h2>
 
-      <ul>
-      <% @academicterm.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
+
+<div class="row">
+  <div class="jumbotron col-md-5">
+    <%= simple_form_for @academicterm do |f| %>
+      <% if @academicterm.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@academicterm.errors.count, "error") %> prohibited this academicterm from being saved:</h2>
+
+          <ul>
+          <% @academicterm.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+          </ul>
+        </div>
       <% end %>
-      </ul>
-    </div>
-  <% end %>
 
-  <div class="field">
-    <%= f.select :term, :collection => Academicterm::TERMHASH.invert.sort %>
-  </div>
+      <div class="field">
+        <b>Choose Term</b><%= f.select :term, :collection => Academicterm::TERMHASH.invert.sort %>
+      </div>
 
-  <div class="field">
-    <%= f.input :year %><br>
+      <div class="field">
+        <%= f.input :year %><br>
+      </div>
+      <div class="actions">
+        <%= f.button :submit %>
+      </div>
+    <% end %>
   </div>
-  <div class="actions">
-    <%= f.button :submit %>
-  </div>
-<% end %>
+</div>

@@ -1,20 +1,27 @@
-<%= simple_form_for @day do |f| %>
-  <% if @day.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@day.errors.count, "error") %> prohibited this day from being saved:</h2>
 
-      <ul>
-      <% @day.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
+
+<div class="row">
+  <div class="jumbotron col-md-5">
+    <%= simple_form_for @day do |f| %>
+      <% if @day.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@day.errors.count, "error") %> prohibited this day from being saved:</h2>
+
+          <ul>
+          <% @day.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+          </ul>
+        </div>
       <% end %>
-      </ul>
-    </div>
-  <% end %>
 
-  <div class="field">
-    <%= f.input :day %><br>
+      <div class="field">
+        <%= f.input :day %><br>
+      </div>
+      <div class="actions">
+        <%= f.button :submit %>
+      </div>
+    <% end %>
+
   </div>
-  <div class="actions">
-    <%= f.button :submit %>
-  </div>
-<% end %>
+</div>
