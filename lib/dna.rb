@@ -1,10 +1,12 @@
 class Dna
+  #@@midpoint
   def initialize
-    #Array.new(height){Array.new(width)}
+    @genes=Array.new(Lessonhour.all.size){Array.new(Day.all.size)}
+    #bu arrayın içi rasgele weeklyschedule nesneleriyle doldurulacak
   end
 
   def crossover(partner)
-    # this ile partner crossover yapılacak
+
   end
 
   def mutation(MRate)
@@ -12,5 +14,6 @@ class Dna
   end
 
   def fitness
+    #bu fonksiyon dna nın uygunluk durumuna göre bir fitness değeri atıyacak
   end
 end

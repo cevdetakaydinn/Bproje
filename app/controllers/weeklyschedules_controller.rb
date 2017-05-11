@@ -40,7 +40,7 @@ class WeeklyschedulesController < ApplicationController
     render :json => @departments
   end
 
-  def listSchedules
+  def listSchedule
     @department=Department.where(id: params[:anything][:department]).limit(1)
     @academicterm=Academicterm.where(id: params[:anything][:academicterm]).limit(1)
     @license=License.where(id: params[:anything][:license]).limit(1)
@@ -76,11 +76,6 @@ class WeeklyschedulesController < ApplicationController
 
   def saveSchedule
     #oluşturlan en iyi ders programını veritabanına kaydedicek
-  end
-
-  def getSchedule
-    #gerekli bilgileri alıp (department,academicterm) view de göstermek için gönderecek
-    #dummy for now
   end
 
   # POST /weeklyschedules

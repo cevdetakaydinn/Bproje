@@ -12,18 +12,18 @@
   <% end %>
 
   <div class="field">
-    <%= f.input :lessonhours_id %><br>
+    Select Lesson Time:<%= f.select :lessonhours_id, Lessonhour.all.map { |l| [l.beginning.strftime("%I:%M%p") + " - "+l.ending.strftime("%I:%M%p") , l.id, { class: l.id }] }, include_blank: true%><br>
   </div>
   <div class="field">
-    <%= f.input :day_id %><br>
+    Select Lesson Day:<%= f.select :day_id, Day.all.map { |l| [l.day, l.id, { class: l.id }] }, include_blank: true%>
   </div>
   <div class="field">
-    <%= f.input :curriculum_id %><br>
+    Select Lesson From Curriculum:<%= f.select :curriculum_id, Curriculum.all.map { |l| [l.departmentlesson.lesson.name, l.id, { class: l.id }] }, include_blank: true%>
   </div>
   <div class="field">
-    <%= f.input :classroom_id %><br>
+    Select Classroom:<%= f.select :classroom_id, Classroom.all.map { |l| [l.number, l.id, { class: l.id }] }, include_blank: true%>
   </div>
   <div class="actions">
-    <%= f.button :submit %>
+    <%= f.button :submit ,"Add Lesson" %>
   </div>
 <% end %>

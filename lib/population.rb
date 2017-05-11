@@ -28,6 +28,7 @@ class Population
   end
 
   def reproduction
+    #crossover (çaprazlana işlemi) yapan fonksiyon
   end
 
   #en iyi ders programını getir
