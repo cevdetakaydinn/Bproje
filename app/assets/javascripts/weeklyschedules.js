@@ -30,7 +30,8 @@ $( document ).ready(function() {
       }
     });
   }
-);
+  );
+
 
 });
 
@@ -47,6 +48,7 @@ function fill_up_form_fac(data)
         $("#anything_facility").append(new Option(name, id));
       }
 };
+
 
 function fill_up_form_dep(data)
 {

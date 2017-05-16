@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <div class="row">
+      <div class="jumbotron">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Time</th>
+              <th>Monday</th>
+              <th>Tuesday</th>
+              <th>Wednesday</th>
+              <th>Thursday</th>
+              <th>Friday</th>
+            </tr>
+          </thead>
+          <tbody>
+            <%Lessonhour.all.each_with_index do |lh,index|%>
+              <tr>
+                  <td><b><%=lh.beginning.strftime("%I:%M%p")+"-"+lh.ending.strftime("%I:%M%p")%></b></td>
+                    <%@array.map{|a| a[index]}.each do |x|%>
+                      <td><%=x%></td>
+                    <%end%>
+              </tr>
+            <%end%>
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>

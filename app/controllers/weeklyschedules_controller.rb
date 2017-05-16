@@ -40,7 +40,7 @@ class WeeklyschedulesController < ApplicationController
     render :json => @departments
   end
 
-  def listSchedule
+  def listSchedules
     @department=Department.where(id: params[:anything][:department]).limit(1)
     @academicterm=Academicterm.where(id: params[:anything][:academicterm]).limit(1)
     @license=License.where(id: params[:anything][:license]).limit(1)
@@ -55,19 +55,24 @@ class WeeklyschedulesController < ApplicationController
     @weeklySch=Array.new
 
     @curriculum.each do |cur|
-        @weeklySch<<Weeklyschedule.where(curriculum_id: cur)
-    end
-    @array=Array.new(Lessonhour.all.size+1) { |k| Array.new(Day.all.size) { |k| "" }}
-    @weeklySch.each do |x|
-      x.each do |y|
-        @array[y[:lessonhours_id]][y[:day_id]]=y
-
+      Weeklyschedule.where(curriculum_id: cur).each do |wcs|
+        @weeklySch<<wcs
       end
     end
-    @array.each_with_index.map do |_, index|
-      @array.map { |row| row[index] }
+    @array=Array.new(Day.all.size) { |k| Array.new(Lessonhour.all.size) { |k| "" }}
+    @weeklySch.sort_by!{|e| e.day_id}
+    @weeklySch.each do |x|
+        @array[x[:day_id]-1][x[:lessonhours_id]-1]=x.curriculum.departmentlesson.lesson.name
+
     end
-    render :json => @array
+    # @array.each_with_index.map do |_, index|
+    #   @array.map { |row| row[index] }
+    # end
+
+    # respond_to do |format|
+    #   format.js { render :js => "getSchedule(@array);" }
+    # end
+
   end
 
   def generateSchedule
