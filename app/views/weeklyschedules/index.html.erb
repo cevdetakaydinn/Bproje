@@ -9,11 +9,12 @@
         <b>License:</b><%= f.select :license, License.all.map { |l| [l.name, l.id, { class: l.id }] }, include_blank: true%><br>
         <b>AcademicTerm:</b><%= f.select :academicterm, Academicterm.all.map { |l| [l.year.to_s+" "+l.term, l.id, { class: l.id }] }, include_blank: true%>
         </br>
-        <%= f.button :submit ,'Show Weeklyschedule',class:"btn btn-info"%>
+        <%= f.button :submit ,'Show Weeklyschedule',class:"btn btn-info", :name => 'show' %>
+        <%= f.button :submit ,'Create Weekly Schedule',class:"btn btn-success" %>
     <% end %>
   </div>
 </div>
 
 <br>
 
-<%= link_to 'Create Weekly Schedule', new_weeklyschedule_path, class:"btn btn-primary" %>
+<%= link_to 'Create Weekly Schedule Manual', new_weeklyschedule_path, class:"btn btn-primary" %>

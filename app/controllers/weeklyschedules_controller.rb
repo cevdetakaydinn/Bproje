@@ -4,16 +4,7 @@ class WeeklyschedulesController < ApplicationController
   # GET /weeklyschedules
   # GET /weeklyschedules.json
   def index
-    @weeklyschedules = Weeklyschedule.all
-    #dumy array
-    @array=Array.new(7) { Array.new(5) }
-    @array = [
-      ["fizik","fizik","fizik","","Matematik","Matematik",],
-      ["","","","","Programlamaya Giriş","Programlamaya Giriş","Programlamaya Giriş"],
-      ["","Ayrık Matematik","Ayrık Matematik","Ayrık Matematik","","",""],
-      ["","","","","Bilgisayar Mühendisliğine Giriş","Bilgisayar Mühendisliğine Giriş",""],
-      ["İngilizce","İngilizce","","","","",""]
-    ]
+
   end
 
   # GET /weeklyschedules/1
@@ -44,39 +35,38 @@ class WeeklyschedulesController < ApplicationController
     @department=Department.where(id: params[:anything][:department]).limit(1)
     @academicterm=Academicterm.where(id: params[:anything][:academicterm]).limit(1)
     @license=License.where(id: params[:anything][:license]).limit(1)
-
     @departmentlicense=Departmentlicense.where(department_id: @department, license_id: @license).limit(1)
     @departmentlessons=Departmentlesson.where(departmentlicense_id: @departmentlicense)
     @curriculum=Array.new
-
     @departmentlessons.each do |dLesson|
       @curriculum.append(Curriculum.where(departmentlesson_id: dLesson ,academicterm: @academicterm))
     end
-    @weeklySch=Array.new
-
-    @curriculum.each do |cur|
-      Weeklyschedule.where(curriculum_id: cur).each do |wcs|
-        @weeklySch<<wcs
+    #Ders programı gosterme
+    if params[:show]
+      @weeklySch=Array.new
+      @curriculum.each do |cur|
+        Weeklyschedule.where(curriculum_id: cur).each do |wcs|
+          @weeklySch<<wcs
+        end
       end
-    end
-    @array=Array.new(Day.all.size) { |k| Array.new(Lessonhour.all.size) { |k| "" }}
-    @weeklySch.sort_by!{|e| e.day_id}
-    @weeklySch.each do |x|
-        @array[x[:day_id]-1][x[:lessonhours_id]-1]=x.curriculum.departmentlesson.lesson.name
+      @array=Array.new(Day.all.size) { |k| Array.new(Lessonhour.all.size) { |k| "" }}
+      @weeklySch.sort_by!{|e| e.day_id}
+      @weeklySch.each do |x|
+          @array[x[:day_id]-1][x[:lessonhours_id]-1]=x.curriculum.departmentlesson.lesson.name
 
+      end
+    #Ders programı Uretme
+    else
+      generateSchedule(@curriculum)
     end
-    # @array.each_with_index.map do |_, index|
-    #   @array.map { |row| row[index] }
-    # end
-
-    # respond_to do |format|
-    #   format.js { render :js => "getSchedule(@array);" }
-    # end
 
   end
 
-  def generateSchedule
-    #Libdeki populasyon sınıfını kullanarak oluşturma işini yapıcak
+  def generateSchedule(curriculum)
+    #Mufredatı kullanarak random population olustur
+    @population = Population.new(1,1,curriculum)
+    render :json => @population.getpop(0)
+    # render :json => @population.getpop(0)
   end
 
   def saveSchedule

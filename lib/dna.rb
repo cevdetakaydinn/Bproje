@@ -1,15 +1,19 @@
 class Dna
   #@@midpoint
-  def initialize
-    @genes=Array.new(Lessonhour.all.size){Array.new(Day.all.size)}
-    #bu arrayın içi rasgele weeklyschedule nesneleriyle doldurulacak
+  def initialize(curriculum)
+    @genes=Array.new(Day.all.size){Array.new(Lessonhour.all.size)}
+    #ornek
+    @genes[0][0]=curriculum[0]
+    #Rasgele doldurulacak
   end
-
+  def getGen
+    @genes
+  end
   def crossover(partner)
 
   end
 
-  def mutation(MRate)
+  def mutation(mRate)
   #  iki boyutlu dizide rasgele bir elemanı cirruculumdan başka bir eleman ile değiştir.
   end
 

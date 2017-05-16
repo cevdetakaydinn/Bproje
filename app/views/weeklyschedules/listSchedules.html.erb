@@ -22,9 +22,11 @@
             <%Lessonhour.all.each_with_index do |lh,index|%>
               <tr>
                   <td><b><%=lh.beginning.strftime("%I:%M%p")+"-"+lh.ending.strftime("%I:%M%p")%></b></td>
+                  <%if @array!=nil%>
                     <%@array.map{|a| a[index]}.each do |x|%>
                       <td><%=x%></td>
                     <%end%>
+                  <%end%>
               </tr>
             <%end%>
 

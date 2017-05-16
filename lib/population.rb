@@ -1,17 +1,19 @@
 class Population
-
-  def initialize(m,popSize)
+  def initialize(m,popSize,curriculum)
     @mutationRate=m
     @population=Array.new
     i=0
     while i<popSize
-      @population<<Dna.new
+      @population<<Dna.new(curriculum)
       i = i+1
     end
     @matingPool=Array.new
     @generations=0
   end
 
+  def getpop(i)
+    @population[i].getGen
+  end
   #bütün populasyonun fitnesslerini hesapla
   def calcFitness
     i=0
