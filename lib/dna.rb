@@ -1,9 +1,12 @@
+
+require 'matrix'
+m = Matrix.build(5, 5) {|row, col| ('a'..'z').to_a[rand(26)] }
 class Dna
   #@@midpoint
   def initialize(curriculum)
-    @genes=Array.new(Day.all.size){Array.new(Lessonhour.all.size)}
+    @genes=Matrix.build(Day.all.size, Lessonhour.all.size) {|row, col| curriculum[rand((Lessonhour.all.size*Day.all.size)-curriculum.size)] }
     #ornek
-    @genes[0][0]=curriculum[0]
+
     #Rasgele doldurulacak
   end
   def getGen
