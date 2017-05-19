@@ -1,10 +1,12 @@
 class Population
   def initialize(m,popSize,curriculum)
+    day=Day.all.size
+    hr=Lessonhour.all.size
     @mutationRate=m
     @population=Array.new
     i=0
     while i<popSize
-      @population<<Dna.new(curriculum)
+      @population<<Dna.new(curriculum,day,hr)
       i = i+1
     end
     @matingPool=Array.new

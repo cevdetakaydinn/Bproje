@@ -53,20 +53,18 @@ class WeeklyschedulesController < ApplicationController
       @weeklySch.sort_by!{|e| e.day_id}
       @weeklySch.each do |x|
           @array[x[:day_id]-1][x[:lessonhours_id]-1]=x.curriculum.departmentlesson.lesson.name
-
       end
-    #Ders programı Uretme
     else
       generateSchedule(@curriculum)
     end
 
   end
-
+  #Ders programı Uretme
   def generateSchedule(curriculum)
     #Mufredatı kullanarak random population olustur
     @population = Population.new(1,1,curriculum)
+    @array =  @population.getpop(0)
     render :json => @population.getpop(0)
-    # render :json => @population.getpop(0)
   end
 
   def saveSchedule
