@@ -12,7 +12,7 @@ class Dna
       while i <= hour
         rday=rnd.rand(day-1)
         rhour=rnd.rand(hr-1)
-          if !@genes[rday][rhour].nil?
+          if @genes[rday][rhour].blank?
             @genes[rday][rhour]=cur[0].departmentlesson.lesson.name
             i=i+1
           end
