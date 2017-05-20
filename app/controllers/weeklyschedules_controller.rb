@@ -55,16 +55,20 @@ class WeeklyschedulesController < ApplicationController
           @array[x[:day_id]-1][x[:lessonhours_id]-1]=x.curriculum.departmentlesson.lesson.name
       end
     else
-      generateSchedule(@curriculum)
+      generatePopulation(@curriculum)
+      render :json =>@population.calcFitness()
+      # @population.naturalSelection()
+      # @population.generate()#crossover
+      # @population.evaluate();
     end
 
   end
   #Ders programı Uretme
-  def generateSchedule(curriculum)
+  def generatePopulation(curriculum)
     #Mufredatı kullanarak random population olustur
     @population = Population.new(1,1,curriculum)
     @array =  @population.getpop(0)
-    render :json => @population.getpop(0)
+    # render :json => @population
   end
 
   def saveSchedule

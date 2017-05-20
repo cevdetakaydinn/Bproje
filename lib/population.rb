@@ -19,9 +19,11 @@ class Population
   #bütün populasyonun fitnesslerini hesapla
   def calcFitness
     i=0
+    @fitness=Array.new
     @population.each do |pop|
-      fitness = pop.fitness
+      @fitness << pop.fitness
     end
+    return @fitness
   end
 
 
