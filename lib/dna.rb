@@ -9,7 +9,7 @@ class Dna
 
     curriculum.each do |cur|
       hour= Departmentlesson.find(cur[0].departmentlesson_id).hour_amount
-      curCurrent=cur[0].departmentlesson.lesson.name
+      curCurrent=cur[0].id
       i=0
       while i < hour
         rday=rnd.rand(day)
@@ -37,16 +37,23 @@ class Dna
   def fitness
     @score=0
     @array=Array.new
-    self.getGen.each do |gen|
-      gen.each do |modul|
-        @array<<modul
-        # if #Hoca çakışması yoksa
-        #   @score = @score + 1
-        # elsif #Sınıf çakışması yoksa
-        #   @score = @score + 1
-        # elsif #Aynı sınıfın başka dersi yoksa
-        #   @score = @score + 1
-        # end
+    self.getGen.each_with_index do |gen,row|
+      gen.each_with_index do |modul,col|
+        # @array<<row
+        # @array<<"/"
+        # @array<<col
+        if !(modul.blank?)
+          #Aynı saatteki bütün dersleri bul
+          @ws = Weeklyschedule.where(day_id:row , lessonhours_id:col)
+          @cur=Curriculum.find(modul)
+          if #Hoca çakışması yoksa
+            @score = @score + 1
+          elsif #Sınıf çakışması yoksa
+            @score = @score + 1
+          elsif #Aynı sınıfın başka dersi yoksa
+            @score = @score + 1
+          end
+        end
       end
     end
     return @array

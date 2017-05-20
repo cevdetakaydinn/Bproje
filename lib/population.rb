@@ -10,6 +10,7 @@ class Population
       i = i+1
     end
     @matingPool=Array.new
+    @fitness=Hash.new
     @generations=0
   end
 
@@ -19,9 +20,9 @@ class Population
   #bütün populasyonun fitnesslerini hesapla
   def calcFitness
     i=0
-    @fitness=Array.new
-    @population.each do |pop|
-      @fitness << pop.fitness
+    @fitness=Hash.new
+    @population.each_with_index do |pop,index|
+      @fitness[index] = pop.fitness
     end
     return @fitness
   end
