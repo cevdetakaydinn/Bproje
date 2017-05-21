@@ -65,10 +65,45 @@ class WeeklyschedulesController < ApplicationController
   end
   #Ders programı Uretme
   def generatePopulation(curriculum)
+    @popHash = Hash.new
+    @cur = Hash.new
+    @cur[0] = Array.new
+    @cur[1] = Array.new
+    @cur[2] = Array.new
+    @cur[3] = Array.new
+    @cur[4] = Array.new
+    @cur[5] = Array.new
+    @cur[6] = Array.new
+    curriculum.each do |cr|
+      currentCrGrade = cr.first.departmentlesson.grade
+      case currentCrGrade
+      when 1
+        @cur[0]<<cr
+      when 2
+        @cur[1]<<cr
+      when 3
+        @cur[2]<<cr
+      when 4
+        @cur[3]<<cr
+      when 5
+        @cur[4]<<cr
+      when 6
+        @cur[5]<<cr
+      when 7
+        @cur[6]<<cr
+      end
+    end
+    @highestGrade=Departmentlesson.maximum(:grade)
+    #highest gradei kullanıp hash {grade:population} olustur
     #Mufredatı kullanarak random population olustur
-    @population = Population.new(1,1,curriculum)
-    @array =  @population.getpop(0)
-    render :json => @population
+    i=0
+    while i<@highestGrade
+      @popHash[i] =  Population.new(1,1,@cur[i])
+      i=i+1
+    end
+    # @population = Population.new(1,1,curriculum)
+    # @array =  @population.getpop(0)
+    render :json => @popHash
   end
 
   def saveSchedule

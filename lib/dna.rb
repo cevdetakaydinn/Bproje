@@ -5,45 +5,32 @@ class Dna
   #@@midpoint
   def initialize(curriculum,day,hr)
     rnd=Random.new
-    @Chromosome= Hash.new
-    @highestGrade=Departmentlesson.maximum(:grade)
-    i = 1
-    while i<=@highestGrade
-      @Chromosome[i]=Array.new(day){Array.new(hr)}
-      i=i+1
-    end
-
+    @genes=Array.new(day){Array.new(hr)}
     curriculum.each do |cur|
-      curCurrent=cur.first
-      if !(curCurrent.nil?)
-        dp = Departmentlesson.find(curCurrent.departmentlesson_id)
-        hour = dp.hour_amount
-        currentGrade = dp.grade
-
-        i=0
-        while i < hour
-          rday=rnd.rand(day)
-          rhour=rnd.rand(hr)
-            if @Chromosome[currentGrade][rday][rhour].blank?
-              @Chromosome[currentGrade][rday][rhour]=curCurrent.id
-              i=i+1
-            end
+      hour= Departmentlesson.find(cur[0].departmentlesson_id).hour_amount
+      curCurrent=cur[0].id
+      i=0
+      while i < hour
+        rday=rnd.rand(day)
+        rhour=rnd.rand(hr)
+        if @genes[rday][rhour].blank?
+          @genes[rday][rhour]=curCurrent
+          i=i+1
         end
       end
-
     end
     # @genes=Matrix.build(Day.all.size, Lessonhour.all.size) {|row, col| curriculum[rand((Lessonhour.all.size*Day.all.size)-curriculum.size)] }
   end
 
   def getGen
-    @Chromosome
+    @genes
   end
   def crossover(partner)
 
   end
 
   def mutation(mRate)
-  #  iki boyutlu dizide rasgele bir elemanı cirruculumdan başka bir eleman ile değiştir.
+    #  iki boyutlu dizide rasgele bir elemanı cirruculumdan başka bir eleman ile değiştir.
   end
 
   def fitness
@@ -57,14 +44,14 @@ class Dna
           @cur=Curriculum.find(modul)
 
           @ws.each do |ws|
-              #hoca çakışması kontrol
-              if @cur.admin.id != ws.curriculum.admin.id
-                @score = @score + 1
+            #hoca çakışması kontrol
+            if @cur.admin.id != ws.curriculum.admin.id
+              @score = @score + 1
               # elsif #Sınıf çakışması yoksa ve sınıf kontenjanı yetiorsa
               #    @score = @score + 1
               # elsif #Aynı sınıfın başka dersi yoksa
               #   @score = @score + 1
-              end
+            end
           end
         end
       end
