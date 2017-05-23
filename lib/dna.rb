@@ -26,31 +26,40 @@ class Dna
     @genes
   end
   def crossover(partner)
-
+    #bu ve parterin genlerinin yarılarını al birleştir.Ve 2 tane çocuk geri döndür.
   end
 
   def mutation(mRate)
     #  iki boyutlu dizide rasgele bir elemanı cirruculumdan başka bir eleman ile değiştir.
+    i=0
+    while i<@genes.length
+      #genes deki bütün id ler bi listeye koy .rand(list.size-1) ile rasgele birini seç ve on ait  dersleri başka yere koy
+      if rand<mRate
+        # @genes[i]=
+      end
+    end
   end
 
   def fitness
     @score=0
-    @array=Array.new
     self.getGen.each_with_index do |gen,row|
       gen.each_with_index do |modul,col|
         if !(modul.blank?)
           #Aynı saatteki bütün dersleri bul
-          @ws = Weeklyschedule.where(day_id:row , lessonhours_id:col)
-          @cur=Curriculum.find(modul)
+          ws = Weeklyschedule.where(day_id:row , lessonhours_id:col)
+          cur=Curriculum.find(modul)
+          curgrade=cur.departmentlesson.grade
 
-          @ws.each do |ws|
+          ws.each do |wc|
             #hoca çakışması kontrol
-            if @cur.admin.id != ws.curriculum.admin.id
+            wsc=wc.curriculum
+            if cur.admin.id != wsc.admin.id
               @score = @score + 1
               # elsif #Sınıf çakışması yoksa ve sınıf kontenjanı yetiorsa
               #    @score = @score + 1
-              # elsif #Aynı sınıfın başka dersi yoksa
-              #   @score = @score + 1
+            #Aynı sınıfın başka dersi varmı
+            elsif cur.departmentlesson.grade != wsc.departmentlesson.grade
+                @score = @score + 1
             end
           end
         end

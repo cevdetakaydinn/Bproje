@@ -41,11 +41,12 @@ class Population
   #en iyi ders programını getir
   def getBest
     max=0
-    i=0
+    i=nil
     @population.each_with_index do |pop,index|
-      if(pop.fitness>max)
+      fit=pop.fitness
+      if(fit>max)
           i=index
-          max=pop.fitness
+          max=fit
       end
     end
     return pop[i]

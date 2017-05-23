@@ -99,10 +99,9 @@ class WeeklyschedulesController < ApplicationController
     i=0
     while i<@highestGrade
       @popHash[i] =  Population.new(1,1,@cur[i])
+      @popHash[i].calcFitness
       i=i+1
     end
-    # @population = Population.new(1,1,curriculum)
-    # @array =  @population.getpop(0)
     render :json => @popHash
   end
 
