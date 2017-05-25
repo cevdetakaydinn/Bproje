@@ -27,7 +27,6 @@ class Population
       @fitness[index] = pop.fitness
     end
     @population = @population.sort_by { |k| k.score }.reverse
-    return @fitness
   end
 
 

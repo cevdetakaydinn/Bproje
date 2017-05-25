@@ -55,7 +55,7 @@ class WeeklyschedulesController < ApplicationController
           @array[x[:day_id]-1][x[:lessonhours_id]-1]=x.curriculum.departmentlesson.lesson.name
       end
     else
-      generatePopulation(@curriculum)
+      @array = generatePopulation(@curriculum)
       # render :json =>@population.calcFitness
       # @population.naturalSelection()
       # @population.generate()#crossover
@@ -98,7 +98,7 @@ class WeeklyschedulesController < ApplicationController
     #Mufredatı kullanarak random population olustur
     i=0
     while i<@highestGrade
-      @popHash[i] = Population.new(0.1,100,@cur[i])
+      @popHash[i] = Population.new(0.1,12,@cur[i])
       # @popHash[i].calcFitness
       # @popHash[0].naturalSelection
       z=0
@@ -110,8 +110,7 @@ class WeeklyschedulesController < ApplicationController
       end
       i=i+1
     end
-    render :json => @popHash
-
+    return @popHash[0].population[0].genes
   end
 
   def saveSchedule

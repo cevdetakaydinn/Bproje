@@ -44,46 +44,60 @@ class Dna
 
   def mutation(mRate)
     #  iki boyutlu dizide rasgele bir elemanı cirruculumdan başka bir eleman ile değiştir.
-      #genes deki bütün id ler bi listeye koy .rand() ile rasgele birini seç ve on ait  dersleri başka yere koy
-      if rand<mRate
-        day=Day.all.size
-        hours=Lessonhour.all.size
-        ranD1=rand(day)
-        ranL1=rand(hours)
-        ders=@genes[ranD1][ranL1]
-        if !(ders.nil?)
-          ranD2=rand(day)
-          ranL2=rand(hours)
-          ders2=@genes[ranD2][ranL2]
-          @genes[ranD1][ranL1] = ders2
-          @genes[ranD2][ranL2] = ders
-        else
-          mutation(mRate)
-        end
+    #genes deki bütün id ler bi listeye koy .rand() ile rasgele birini seç ve on ait  dersleri başka yere koy
+    if rand<mRate
+      day=Day.all.size
+      hours=Lessonhour.all.size
+      ranD1=rand(day)
+      ranL1=rand(hours)
+      ders=@genes[ranD1][ranL1]
+      if !(ders.nil?)
+        ranD2=rand(day)
+        ranL2=rand(hours)
+        ders2=@genes[ranD2][ranL2]
+        @genes[ranD1][ranL1] = ders2
+        @genes[ranD2][ranL2] = ders
+      else
+        mutation(mRate)
       end
+    end
 
   end
 
   def fitness
     @score=0
-    self.getGen.each_with_index do |gen,row|
+    temp=Hash.new
+    @genes.each_with_index do |gen,row|
+      gen.each_with_index do |modul,col|
+        if temp[modul].nil?
+          temp[modul] = 1
+        else
+          temp[modul] += 1
+        end
+      end
+    end
+    @genes.each_with_index do |gen,row|
       gen.each_with_index do |modul,col|
         if !(modul.blank?)
           #Aynı saatteki bütün dersleri bul
           ws = Weeklyschedule.where(day_id:row , lessonhours_id:col)
           cur=Curriculum.find(modul)
           curgrade=cur.departmentlesson.grade
-
+          hour = Departmentlesson.find(cur.departmentlesson_id).hour_amount
           ws.each do |wc|
             #hoca çakışması kontrol
             wsc=wc.curriculum
             if cur.admin.id != wsc.admin.id
               @score = @score + 1
-              # elsif #Sınıf çakışması yoksa ve sınıf kontenjanı yetiorsa
-              #    @score = @score + 1
+            end
+            # elsif #Sınıf çakışması yoksa ve sınıf kontenjanı yetiorsa
+            #    @score = @score + 1
             #Aynı sınıfın başka dersi varmı
-            elsif cur.departmentlesson.grade != wsc.departmentlesson.grade
-                @score = @score + 1
+            if cur.departmentlesson.grade != wsc.departmentlesson.grade
+              @score = @score + 1
+            end
+            if hour == temp[cur.id]
+              @score = @score +1
             end
           end
         end
