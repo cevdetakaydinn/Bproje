@@ -98,11 +98,14 @@ class WeeklyschedulesController < ApplicationController
     #Mufredatı kullanarak random population olustur
     i=0
     while i<@highestGrade
-      @popHash[i] =  Population.new(1,1,@cur[i])
+      @popHash[i] =  Population.new(0.9,10,@cur[i])
       @popHash[i].calcFitness
+      @popHash[i].naturalSelection
+      @popHash[i].reproduction
       i=i+1
     end
-    render :json => @popHash
+    render :json => @popHash[0]
+
   end
 
   def saveSchedule
