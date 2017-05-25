@@ -2,6 +2,8 @@
 class Dna
   attr_accessor :score, :genes
   def initialize(curriculum,day,hr)
+    @@day= day
+    @@hour= hr
     @@curriculum=curriculum
     rnd = Random.new
     @genes=Array.new(day){Array.new(hr)}
@@ -18,7 +20,7 @@ class Dna
         end
       end
     end
-    # @genes=Matrix.build(Day.all.size, Lessonhour.all.size) {|row, col| curriculum[rand((Lessonhour.all.size*Day.all.size)-curriculum.size)] }
+    # @genes=Matrix.build(@@day, @@hour) {|row, col| curriculum[rand((@@hour*@@day)-curriculum.size)] }
   end
   def getScore
     @score
@@ -28,11 +30,11 @@ class Dna
   end
   def crossover(partner)
     #bu ve parterin genlerinin yarılarını al birleştir.Ve 2 tane çocuk geri döndür.
-    child1=Dna.new(@@curriculum,Day.all.size,Lessonhour.all.size)
-    child2=Dna.new(@@curriculum,Day.all.size,Lessonhour.all.size)
+    child1=Dna.new(@@curriculum,@@day,@@hour)
+    child2=Dna.new(@@curriculum,@@day,@@hour)
     birey = @genes
     birey2 = partner.genes
-    day=Day.all.size
+    day=@@day
     birey_P1 = birey[0, day/2]
     birey_P2 = birey[day/2..-1]
     birey2_P1 = birey2[0, day/2]
@@ -47,7 +49,7 @@ class Dna
     #genes deki bütün id ler bi listeye koy .rand() ile rasgele birini seç ve on ait  dersleri başka yere koy
     if rand<mRate
       day=Day.all.size
-      hours=Lessonhour.all.size
+      hours=@@hour
       ranD1=rand(day)
       ranL1=rand(hours)
       ders=@genes[ranD1][ranL1]

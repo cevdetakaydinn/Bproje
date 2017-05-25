@@ -24,7 +24,11 @@
                   <td><b><%=lh.beginning.strftime("%I:%M%p")+"-"+lh.ending.strftime("%I:%M%p")%></b></td>
                   <%if @array!=nil%>
                     <%@array.map{|a| a[index]}.each do |x|%>
-                      <td><%=x%></td>
+                      <td>
+                        <%if !(x.nil?)%>
+                          <%=Curriculum.find(x).departmentlesson.lesson.name%>
+                        <%end%>
+                      </td>
                     <%end%>
                   <%end%>
               </tr>

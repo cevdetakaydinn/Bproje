@@ -56,7 +56,6 @@ class WeeklyschedulesController < ApplicationController
       end
     else
       @array = generatePopulation(@curriculum)
-      # render :json =>@population.calcFitness
       # @population.naturalSelection()
       # @population.generate()#crossover
       # @population.evaluate();
@@ -110,6 +109,15 @@ class WeeklyschedulesController < ApplicationController
       end
       i=i+1
     end
+    # @popHash[0].population[0].genes.each_with_index do |gen,day|
+    #   gen.each_with_index do |modul,hour|
+    #     unless modul.blank?
+    #       @weeklyschedule = Weeklyschedule.new(hour,day,modul,1)
+    #       @weeklyschedule.save
+    #     end
+    #   end
+    # end
+    # render :json =>@popHash[0]
     return @popHash[0].population[0].genes
   end
 
