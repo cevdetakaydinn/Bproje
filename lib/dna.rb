@@ -1,10 +1,9 @@
 
-require 'matrix'
-m = Matrix.build(5, 5) {|row, col| ('a'..'z').to_a[rand(26)] }
 class Dna
-  attr_accessor :score
+  attr_accessor :score, :genes
   def initialize(curriculum,day,hr)
-    rnd=Random.new
+    @@curriculum=curriculum
+    rnd = Random.new
     @genes=Array.new(day){Array.new(hr)}
     curriculum.each do |cur|
       hour= Departmentlesson.find(cur[0].departmentlesson_id).hour_amount
@@ -29,6 +28,18 @@ class Dna
   end
   def crossover(partner)
     #bu ve parterin genlerinin yarılarını al birleştir.Ve 2 tane çocuk geri döndür.
+    child1=Dna.new(@@curriculum,Day.all.size,Lessonhour.all.size)
+    child2=Dna.new(@@curriculum,Day.all.size,Lessonhour.all.size)
+    birey = @genes
+    birey2 = partner.genes
+    day=Day.all.size
+    birey_P1 = birey[0, day/2]
+    birey_P2 = birey[day/2..-1]
+    birey2_P1 = birey2[0, day/2]
+    birey2_P2 = birey2[day/2..-1]
+    child1.genes=birey_P1+birey2_P2
+    child2.genes=birey2_P1+birey_P2
+    return child1,child2
   end
 
   def mutation(mRate)
@@ -41,15 +52,16 @@ class Dna
         ranL1=rand(hours)
         ders=@genes[ranD1][ranL1]
         if !(ders.nil?)
-          binding.pry
           ranD2=rand(day)
           ranL2=rand(hours)
-          @genes[ranD1][ranL1]=@genes[ranD2][ranL2]
-          @genes[ranD2][ranL2]=ders
+          ders2=@genes[ranD2][ranL2]
+          @genes[ranD1][ranL1] = ders2
+          @genes[ranD2][ranL2] = ders
         else
           mutation(mRate)
         end
       end
+
   end
 
   def fitness

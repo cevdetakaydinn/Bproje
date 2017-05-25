@@ -1,8 +1,8 @@
 class Population
   attr_accessor :population
   def initialize(m,popSize,curriculum)
-    day=Day.all.size
-    hr=Lessonhour.all.size
+    day = Day.all.size
+    hr = Lessonhour.all.size
     @mutationRate=m
     @population=Array.new
     i=0
@@ -18,6 +18,7 @@ class Population
   def getpop(i)
     @population[i].getGen
   end
+
   #bütün populasyonun fitnesslerini hesapla
   def calcFitness
     i=0
@@ -32,15 +33,26 @@ class Population
 
   def naturalSelection
     # @population.sort_by! { |k| k.score }
-    i=0
-    @poporj=@population
     @matingpool=@population[0 , @population.length/2]
   end
 
   def reproduction
-    #crossover (çaprazlana işlemi) yapan fonksiyon
-    @population.each do |pop|
-      pop.mutation(@mutationRate)
+    i=0
+    child = Array.new
+    while i<@matingpool.length
+      child += @matingpool[i].crossover(@matingpool[i+1])
+      i += 2
+    end
+    child.each do |ch|
+      @matingpool <<ch
+    end
+    # @matingpool += child
+    @population = @matingpool
+
+    y = 0
+    while y<@population.length
+      @population[y].mutation(@mutationRate)
+      y += 1
     end
   end
 

@@ -2,7 +2,7 @@
 
 <div class="row">
   <div class="jumbotron col-md-5">
-    <%= simple_form_for :anything, url: "weeklyschedules/listSchedules" do |f| %>
+    <%= simple_form_for :anything, url: "listSchedules" do |f| %>
         <b>University:</b><%= f.select :university, University.all.map { |l| [l.name, l.id, { class: l.id }] }, include_blank: true%><br>
         <b>Facility:</b><%= f.select :facility,{}%><br>
         <b>Department:</b><%= f.select :department, Department.all.map { |l| [l.name, l.id, { class: l.id }] }, include_blank: true%><br>
