@@ -25,9 +25,13 @@
                   <%if @array!=nil%>
                     <%@array.map{|a| a[index]}.each do |x|%>
                       <td>
-                        <%if !(x.nil?)%>
-                          <%=Curriculum.find(x).departmentlesson.lesson.name%>
-                        <%end%>
+                        <%if !(x.nil?)
+                            if x.kind_of? Integer%>
+                              <%=Curriculum.find(x).departmentlesson.lesson.name%>
+                            <%else%>
+                              <%=x%>
+                        <%end
+                      end%>
                       </td>
                     <%end%>
                   <%end%>

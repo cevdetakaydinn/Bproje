@@ -109,15 +109,15 @@ class WeeklyschedulesController < ApplicationController
       end
       i=i+1
     end
-    # @popHash[0].population[0].genes.each_with_index do |gen,day|
-    #   gen.each_with_index do |modul,hour|
-    #     unless modul.blank?
-    #       @weeklyschedule = Weeklyschedule.new(hour,day,modul,1)
-    #       @weeklyschedule.save
-    #     end
-    #   end
-    # end
-    # render :json =>@popHash[0]
+    @popHash[0].population[0].genes.each_with_index do |gen,day|
+      gen.each_with_index do |modul,hour|
+        unless modul.blank?
+          @weeklyschedule = Weeklyschedule.new(:lessonhours_id => hour+1,:day_id => day+1,:curriculum_id=> modul,:classroom_id=>1)
+          @weeklyschedule.save
+        end
+      end
+    end
+    # render :json =>@popHash
     return @popHash[0].population[0].genes
   end
 
@@ -173,6 +173,6 @@ class WeeklyschedulesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def weeklyschedule_params
-      params.require(:weeklyschedule).permit(:lessonhours_id, :day_id, :curriculum_id, :classroom_id)
+      params.require(:weeklyschedule).permit(:lessonhour_id, :day_id, :curriculum_id, :classroom_id)
     end
 end

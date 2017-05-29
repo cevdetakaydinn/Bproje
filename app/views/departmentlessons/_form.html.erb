@@ -19,7 +19,7 @@
     </div>
     <div class="col-md-6">
       <%= f.select :lesson_id, Lesson.all.map { |l| [l.name, l.id, { class: l.id }] }, include_blank: true%></br></br>
-      <%= f.select :departmentlicense_id, Departmentlicense.all.map { |l| [l.department.name+" "+l.license.name, l.id, { class: l.id }] }, include_blank: true%><br></br>
+      <%= f.select :departmentlicense_id, Departmentlicense.all.map { |l| [l.department.facility.university.name+"  "+l.department.name+" "+l.license.name, l.id, { class: l.id }] }, include_blank: true%><br></br>
       <%= f.input :hour_amount, label:false %></br>
       <%= f.input :grade, label:false %>
     </div>
