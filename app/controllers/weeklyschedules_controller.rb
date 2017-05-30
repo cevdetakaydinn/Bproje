@@ -49,16 +49,47 @@ class WeeklyschedulesController < ApplicationController
           @weeklySch<<wcs
         end
       end
-      @array=Array.new(Day.all.size) { |k| Array.new(Lessonhour.all.size) { |k| "" }}
-      @weeklySch.sort_by!{|e| e.day_id}
-      @weeklySch.each do |x|
-          @array[x[:day_id]-1][x[:lessonhours_id]-1]=x.curriculum.departmentlesson.lesson.name
+      @grade = Hash.new
+      t=0
+      while t<6
+        @grade[t] = Array.new
+        t += 1
       end
+      @array=Array.new(Day.all.size) { |k| Array.new(Lessonhour.all.size) { |k| "" }}
+
+      @weeklySch.each do |x|
+        currentGrade = x.curriculum.departmentlesson.grade
+        case currentGrade
+        when 1
+          @grade[0]<<x
+        when 2
+          @grade[1]<<x
+        when 3
+          @grade[2]<<x
+        when 4
+          @grade[3]<<x
+        when 5
+          @grade[4]<<x
+        when 6
+          @grade[5]<<x
+        when 7
+          @grade[6]<<x
+        end
+      end
+      k=0
+      while k<Departmentlesson.maximum(:grade)
+        @grade[k].sort_by!{|e| e.day_id}
+        k=k+1
+      end
+       render :json =>@grade
+      
+      # @array[x[:day_id]-1][x[:lessonhours_id]-1]=x.curriculum.departmentlesson.lesson.name
+
+    #Ders çizelgesi üret
     else
+
       @array = generatePopulation(@curriculum)
-      # @population.naturalSelection()
-      # @population.generate()#crossover
-      # @population.evaluate();
+
     end
 
   end
@@ -109,13 +140,17 @@ class WeeklyschedulesController < ApplicationController
       end
       i=i+1
     end
-    @popHash[0].population[0].genes.each_with_index do |gen,day|
-      gen.each_with_index do |modul,hour|
-        unless modul.blank?
-          @weeklyschedule = Weeklyschedule.new(:lessonhours_id => hour+1,:day_id => day+1,:curriculum_id=> modul,:classroom_id=>1)
-          @weeklyschedule.save
+    t=0
+    while t<@highestGrade
+      @popHash[t].population[0].genes.each_with_index do |gen,day|
+        gen.each_with_index do |modul,hour|
+          unless modul.blank?
+            @weeklyschedule = Weeklyschedule.new(:lessonhours_id => hour+1,:day_id => day+1,:curriculum_id=> modul,:classroom_id=>1)
+            @weeklyschedule.save
+          end
         end
       end
+      t=t+1
     end
     # render :json =>@popHash
     return @popHash[0].population[0].genes
