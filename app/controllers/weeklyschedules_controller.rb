@@ -49,13 +49,14 @@ class WeeklyschedulesController < ApplicationController
           @weeklySch<<wcs
         end
       end
+      @showHash=Hash.new
       @grade = Hash.new
       t=0
       while t<6
         @grade[t] = Array.new
+        @showHash[t]=Array.new(Day.all.size) { |k| Array.new(Lessonhour.all.size) { |k| "" }}
         t += 1
       end
-      @array=Array.new(Day.all.size) { |k| Array.new(Lessonhour.all.size) { |k| "" }}
 
       @weeklySch.each do |x|
         currentGrade = x.curriculum.departmentlesson.grade
@@ -81,14 +82,28 @@ class WeeklyschedulesController < ApplicationController
         @grade[k].sort_by!{|e| e.day_id}
         k=k+1
       end
-       render :json =>@grade
-      
+      asd=Array.new
+       k=0
+       while k<Departmentlesson.maximum(:grade)
+         @grade[k].each do |grd|
+           unless grd.blank?
+             @showHash[k][grd.day_id-1][grd.lessonhours_id-1]=grd.curriculum.departmentlesson.lesson.name
+             asd<<k
+           end
+         end
+         k=k+1
+       end
+      #  render :json =>@showHash
       # @array[x[:day_id]-1][x[:lessonhours_id]-1]=x.curriculum.departmentlesson.lesson.name
 
+    #Girilen ders programını siler
+    elsif params[:delete]
+      render :json=>@curriculum
     #Ders çizelgesi üret
     else
 
-      @array = generatePopulation(@curriculum)
+      temp = generatePopulation(@curriculum)
+      #@showHash üretilcek
 
     end
 
@@ -153,10 +168,10 @@ class WeeklyschedulesController < ApplicationController
       t=t+1
     end
     # render :json =>@popHash
-    return @popHash[0].population[0].genes
+    return @popHash
   end
 
-  def saveSchedule
+  def deleteSchedule(sch)
     #oluşturlan en iyi ders programını veritabanına kaydedicek
   end
 

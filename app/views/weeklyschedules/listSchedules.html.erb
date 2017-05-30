@@ -7,7 +7,10 @@
   <body>
     <div class="row">
       <div class="jumbotron">
-        <table class="table table-bordered">
+        <%i=0
+        while i<4
+        @array=@showHash[i]%>
+          <table class="table table-bordered">
           <thead>
             <tr>
               <th>Time</th>
@@ -40,7 +43,9 @@
 
           </tbody>
         </table>
+        <%i=i+1
+        end%>
       </div>
-    </div>
+       </div>
   </body>
 </html>
