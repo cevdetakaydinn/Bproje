@@ -98,12 +98,21 @@ class WeeklyschedulesController < ApplicationController
 
     #Girilen ders programını siler
     elsif params[:delete]
-      render :json=>@curriculum
+      @curriculum.each do |cur|
+        Weeklyschedule.where(:curriculum_id=>cur.first.id).each do |ws|
+          ws.destroy
+        end
+      end
+      render :json=>Weeklyschedule.all
+
     #Ders çizelgesi üret
     else
 
-      temp = generatePopulation(@curriculum)
-      #@showHash üretilcek
+      generatePopulation(@curriculum)
+      respond_to do |format|
+        format.html { redirect_to weeklyschedules_url, notice: 'Weeklyschedule was successfully created.' }
+        format.json { head :no_content }
+      end
 
     end
 
@@ -143,11 +152,11 @@ class WeeklyschedulesController < ApplicationController
     #Mufredatı kullanarak random population olustur
     i=0
     while i<@highestGrade
-      @popHash[i] = Population.new(0.1,12,@cur[i])
+      @popHash[i] = Population.new(0.1,36,@cur[i])
       # @popHash[i].calcFitness
       # @popHash[0].naturalSelection
       z=0
-      while z<100
+      while z<500
         @popHash[i].calcFitness
         @popHash[i].naturalSelection
         @popHash[i].reproduction
