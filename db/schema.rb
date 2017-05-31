@@ -139,17 +139,17 @@ ActiveRecord::Schema.define(version: 20170417092043) do
   end
 
   create_table "weeklyschedules", force: :cascade do |t|
-    t.integer  "lessonhours_id"
+    t.integer  "lessonhour_id"
     t.integer  "day_id"
     t.integer  "curriculum_id"
     t.integer  "classroom_id"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
 
   add_index "weeklyschedules", ["classroom_id"], name: "index_weeklyschedules_on_classroom_id"
   add_index "weeklyschedules", ["curriculum_id"], name: "index_weeklyschedules_on_curriculum_id"
   add_index "weeklyschedules", ["day_id"], name: "index_weeklyschedules_on_day_id"
-  add_index "weeklyschedules", ["lessonhours_id"], name: "index_weeklyschedules_on_lessonhours_id"
+  add_index "weeklyschedules", ["lessonhour_id"], name: "index_weeklyschedules_on_lessonhour_id"
 
 end
