@@ -200,7 +200,7 @@ class Dna
     #  iki boyutlu dizide rasgele bir elemanı cirruculumdan başka bir eleman ile değiştir.
     #genes deki bütün id ler bi listeye koy .rand() ile rasgele birini seç ve on ait  dersleri başka yere koy
     if rand<mRate
-      day=Day.all.size
+      day=@@day
       hours=@@hour
       ranD1=rand(day)
       ranL1=rand(hours)

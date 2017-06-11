@@ -23,6 +23,8 @@ Rails.application.routes.draw do
   get 'weeklyschedules/listSchedules', to: "weeklyschedules#listSchedules"
   post 'addClassrooms', to: "weeklyschedules#addClassrooms"
   get 'addClassrooms', to: "weeklyschedules#addClassrooms"
+  post 'saveClassrooms', to: "weeklyschedules#saveClassrooms"
+  get 'saveClassrooms', to: "weeklyschedules#saveClassrooms"
   post 'weeklyschedules/deleteSchedule', to: "weeklyschedules#deleteSchedule"
   get 'weeklyschedules/deleteSchedule', to: "weeklyschedules#deleteSchedule"
   get 'instructors', to: "admins/instructors#index"

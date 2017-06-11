@@ -4,6 +4,42 @@
 	<title>Classrooms</title>
 </head>
 <body>
-Add Classroom Manually
+<div class="jumbotron">
+  <%@weeklySch.each do |x| %>
+  
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Lesson</th>
+        <th>Current Classroom</th>
+        <th>Classroom</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= simple_form_for :anything, url: "saveClassrooms" do |f| %> 
+      <tr>
+        <td class="col-xs-3">
+          <p><%=x.curriculum.departmentlesson.lesson.name%></p>
+          <%= f.hidden_field :weeklyschedule_id, :value => x.id %>
+        </td>
+        <td class="col-xs-3">
+          <%unless x.classroom_id.nil?%>
+            <%=x.classroom.number%>
+          <%else%>
+            Empty
+            <%end%>
+        </td>
+        <td class="col-xs-2">
+          <%= f.select :classroom, Classroom.all.map { |l| [l.number, l.id, { class: l.id }] }, include_blank: true%>
+        </td>
+        <td><%= f.button :submit ,"Add Classroom" %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<%end%>
+</div>
+
 </body>
 </html>

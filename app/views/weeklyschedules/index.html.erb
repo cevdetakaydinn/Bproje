@@ -33,3 +33,33 @@
 <br>
 
 <%= link_to 'Create Weekly Schedule Manually', new_weeklyschedule_path, class:"btn btn-primary" %>
+</br>
+</br>
+<div class="jumbotron">
+    <h2>Choose schedule to add classrooms</h2>
+    <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Department</th>
+              <th>License</th>
+              <th>Academic Term</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+          <%= simple_form_for :anything, url: "addClassrooms" do |f| %> 
+            <tr><td>
+              <%= f.select :department, Department.all.map { |l| [l.facility.university.name+""+l.name, l.id, { class: l.id }] }, include_blank: true%>
+            </td>
+            <td>
+              <%= f.select :license, License.all.map { |l| [l.name, l.id, { class: l.id }] }, include_blank: true%>
+            </td>
+            <td>
+            <%= f.select :academicterm, Academicterm.all.map { |l| [l.year.to_s+" "+l.term, l.id, { class: l.id }] }, include_blank: true%>
+            </td>
+            <td><%= f.button :submit ,"List Schedule" %></td>
+            </tr>
+          <% end %>
+          </tbody>
+        </table>
+</div>

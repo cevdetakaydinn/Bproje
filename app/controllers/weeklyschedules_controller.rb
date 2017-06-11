@@ -21,6 +21,37 @@ class WeeklyschedulesController < ApplicationController
   def edit
   end
   def addClassrooms
+    @department=Department.where(id: params[:anything][:department]).limit(1)
+    @academicterm=Academicterm.where(id: params[:anything][:academicterm]).limit(1)
+    @license=License.where(id: params[:anything][:license]).limit(1)
+    @departmentlicense=Departmentlicense.where(department_id: @department, license_id: @license).limit(1)
+    @departmentlessons=Departmentlesson.where(departmentlicense_id: @departmentlicense)
+    @curriculum=Array.new
+    @departmentlessons.each do |dLesson|
+      @curriculum.append(Curriculum.where(departmentlesson_id: dLesson ,academicterm: @academicterm))
+    end
+    @weeklySch=Array.new
+      @curriculum.each do |cur|
+        Weeklyschedule.where(curriculum_id: cur).each do |wcs|
+          @weeklySch<<wcs
+        end
+    end
+  end
+
+  def saveClassrooms
+    @ws=Weeklyschedule.find(params[:anything][:weeklyschedule_id])
+    @cs=Classroom.where(id: params[:anything][:classroom]).limit(1)
+    list=Weeklyschedule.where(day_id: @ws.day_id,classroom_id: @cs.first.id, lessonhour_id: @ws.lessonhour_id)
+    asd=false
+    unless list.size>0
+      @ws.classroom_id=@cs.first.id
+      @ws.save
+      asd=@ws
+    else
+      asd="Sınıf Meşgul"
+    end
+
+    render :json =>asd
   end
   def listFacilities
     @facilities=Facility.where(university_id: params[:university_id])
@@ -175,7 +206,7 @@ class WeeklyschedulesController < ApplicationController
       @popHash[t].population[0].genes.each_with_index do |gen,day|
         gen.each_with_index do |modul,hour|
           unless modul.blank?
-            @weeklyschedule = Weeklyschedule.new(:lessonhour_id => hour+1,:day_id => day+1,:curriculum_id=> modul,:classroom_id=>1)
+            @weeklyschedule = Weeklyschedule.new(:lessonhour_id => hour+1,:day_id => day+1,:curriculum_id=> modul,:classroom_id=>nil)
             @weeklyschedule.save
           end
         end
