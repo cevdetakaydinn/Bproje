@@ -1,8 +1,8 @@
 class Population
   attr_accessor :population
-  def initialize(m,popSize,curriculum)
-    day = Day.all.size
-    hr = Lessonhour.all.size
+  def initialize(m,popSize,curriculum,allday,lhour)
+    day = allday
+    hr = lhour
     @mutationRate=m
     @population=Array.new
     i=0

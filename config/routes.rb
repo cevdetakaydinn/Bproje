@@ -21,6 +21,8 @@ Rails.application.routes.draw do
   root to: "home#index"
   post 'weeklyschedules/listSchedules', to: "weeklyschedules#listSchedules"
   get 'weeklyschedules/listSchedules', to: "weeklyschedules#listSchedules"
+  post 'addClassrooms', to: "weeklyschedules#addClassrooms"
+  get 'addClassrooms', to: "weeklyschedules#addClassrooms"
   post 'weeklyschedules/deleteSchedule', to: "weeklyschedules#deleteSchedule"
   get 'weeklyschedules/deleteSchedule', to: "weeklyschedules#deleteSchedule"
   get 'instructors', to: "admins/instructors#index"

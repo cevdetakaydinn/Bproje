@@ -1,21 +1,28 @@
 <p id="notice"><%= notice %></p>
 
 <div class="row">
-  <div class="jumbotron col-md-5">
+  <div class="jumbotron col-md-8">
     <%= simple_form_for :anything, url: "weeklyschedules/listSchedules" do |f| %>
         <b>University:</b>
         <div class="form-group">
             <%= f.select :university, University.all.map { |l| [l.name, l.id, { class: l.id }] },class:"form-control" ,include_blank: true%>
         </div>
         <b>Facility:</b>
+        <div class="form-group">
         <%= f.select :facility,{}%><br>
+        </div>
         <b>Department:</b>
-        <%= f.select :department, Department.all.map { |l| [l.facility.university.name+""+l.name, l.id, { class: l.id }] }, include_blank: true%><br>
+        <div class="form-group">
+        <%= f.select :department, Department.all.map { |l| [l.facility.university.name+""+l.name, l.id, { class: l.id }] }, include_blank: true%>
+        </div>
         <b>License:</b>
-        <%= f.select :license, License.all.map { |l| [l.name, l.id, { class: l.id }] }, include_blank: true%><br>
+        <div class="form-group">
+        <%= f.select :license, License.all.map { |l| [l.name, l.id, { class: l.id }] }, include_blank: true%>
+        </div>
         <b>AcademicTerm:</b>
+        <div class="form-group">
         <%= f.select :academicterm, Academicterm.all.map { |l| [l.year.to_s+" "+l.term, l.id, { class: l.id }] }, include_blank: true%>
-        </br>
+        </div>
         <%= f.button :submit ,'Show Weeklyschedule',class:"btn btn-info", :name => 'show' %>
         <%= f.button :submit ,'Create Weekly Schedule',class:"btn btn-success" %>
         <%= f.button :submit ,'Delete Weeklyschedule',class:"btn btn-danger", :name => 'delete', :data => {:confirm => 'Are you sure?'} %>

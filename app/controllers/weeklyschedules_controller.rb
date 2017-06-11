@@ -20,7 +20,8 @@ class WeeklyschedulesController < ApplicationController
   # GET /weeklyschedules/1/edit
   def edit
   end
-
+  def addClassrooms
+  end
   def listFacilities
     @facilities=Facility.where(university_id: params[:university_id])
     render :json => @facilities
@@ -87,14 +88,14 @@ class WeeklyschedulesController < ApplicationController
        while k<Departmentlesson.maximum(:grade)
          @grade[k].each do |grd|
            unless grd.blank?
-             @showHash[k][grd.day_id-1][grd.lessonhours_id-1]=grd.curriculum.departmentlesson.lesson.name
+             @showHash[k][grd.day_id-1][grd.lessonhour_id-1]=grd.curriculum.departmentlesson.lesson.name
              asd<<k
            end
          end
          k=k+1
        end
       #  render :json =>@showHash
-      # @array[x[:day_id]-1][x[:lessonhours_id]-1]=x.curriculum.departmentlesson.lesson.name
+      # @array[x[:day_id]-1][x[:lessonhour_id]-1]=x.curriculum.departmentlesson.lesson.name
 
     #Girilen ders programını siler
     elsif params[:delete]
@@ -103,8 +104,10 @@ class WeeklyschedulesController < ApplicationController
           ws.destroy
         end
       end
-      render :json=>Weeklyschedule.all
-
+      respond_to do |format|
+        format.html { redirect_to weeklyschedules_url, notice: 'Weeklyschedule was successfully deleted.' }
+        format.json { head :no_content }
+      end
     #Ders çizelgesi üret
     else
 
@@ -151,12 +154,14 @@ class WeeklyschedulesController < ApplicationController
     #highest gradei kullanıp hash {grade:population} olustur
     #Mufredatı kullanarak random population olustur
     i=0
+    allday=Day.all.size
+    allhour=Lessonhour.all.size
     while i<@highestGrade
-      @popHash[i] = Population.new(0.1,36,@cur[i])
+      @popHash[i] = Population.new(0.01,100,@cur[i],allday,allhour)
       # @popHash[i].calcFitness
       # @popHash[0].naturalSelection
       z=0
-      while z<500
+      while z<300
         @popHash[i].calcFitness
         @popHash[i].naturalSelection
         @popHash[i].reproduction
@@ -164,12 +169,13 @@ class WeeklyschedulesController < ApplicationController
       end
       i=i+1
     end
+
     t=0
     while t<@highestGrade
       @popHash[t].population[0].genes.each_with_index do |gen,day|
         gen.each_with_index do |modul,hour|
           unless modul.blank?
-            @weeklyschedule = Weeklyschedule.new(:lessonhours_id => hour+1,:day_id => day+1,:curriculum_id=> modul,:classroom_id=>1)
+            @weeklyschedule = Weeklyschedule.new(:lessonhour_id => hour+1,:day_id => day+1,:curriculum_id=> modul,:classroom_id=>1)
             @weeklyschedule.save
           end
         end

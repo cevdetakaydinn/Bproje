@@ -12,7 +12,7 @@
   <% end %>
 
   <div class="field">
-    Select Lesson Time:<%= f.select :lessonhours_id, Lessonhour.all.map { |l| [l.beginning.strftime("%I:%M%p") + " - "+l.ending.strftime("%I:%M%p") , l.id, { class: l.id }] }, include_blank: true%><br>
+    Select Lesson Time:<%= f.select :lessonhour_id, Lessonhour.all.map { |l| [l.beginning.strftime("%I:%M%p") + " - "+l.ending.strftime("%I:%M%p") , l.id, { class: l.id }] }, include_blank: true%><br>
   </div>
   <div class="field">
     Select Lesson Day:<%= f.select :day_id, Day.all.map { |l| [l.day, l.id, { class: l.id }] }, include_blank: true%>

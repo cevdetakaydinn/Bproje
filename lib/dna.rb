@@ -17,6 +17,10 @@ class Dna
         if @genes[rday][rhour].blank?
           @genes[rday][rhour]=curCurrent
           i=i+1
+          if @genes[rday][rhour+1].blank?&& i<hour
+            @genes[rday][rhour+1]=curCurrent
+            i=i+1
+          end
         end
       end
     end
@@ -35,13 +39,161 @@ class Dna
     birey = @genes
     birey2 = partner.genes
     day=@@day
-    birey_P1 = birey[0, day/2]
-    birey_P2 = birey[day/2..-1]
-    birey2_P1 = birey2[0, day/2]
-    birey2_P2 = birey2[day/2..-1]
-    child1.genes=birey_P1+birey2_P2
-    child2.genes=birey2_P1+birey_P2
+    hr=@@hour
+    bir_1_array=Array.new
+    bir_2_array=Array.new
+    child_1_array=Array.new(day){Array.new(hr)}
+    child_1_array2=Array.new(day){Array.new(hr)}
+    child_2_array=Array.new(day){Array.new(hr)}
+    child_2_array2=Array.new(day){Array.new(hr)}
+    # Ders programlarını derslere göre böl
+    birey.each do |x|
+      x.each do |y|
+        if !(bir_1_array.include? y) && y!=nil
+          bir_1_array<<y
+        end
+      end
+    end
+    kalanlar=bir_1_array.size-bir_1_array.size/2
+    k=0
+    while k<bir_1_array.size/2
+      bir_2_array<<bir_1_array[k]
+      k=k+1
+    end
+    bir_1_array -= bir_2_array
+
+    z=0
+    while z<bir_1_array.size+bir_2_array.size
+      birey.each_with_index do |m,gun|
+        m.each_with_index do |l,saat|
+          if l==bir_1_array[z]
+            child_1_array[gun][saat] = l
+          end 
+          if l==bir_2_array[z]
+            child_1_array2[gun][saat] = l
+          end
+        end
+      end
+      birey2.each_with_index do |m,gun|
+        m.each_with_index do |l,saat|
+          if l==bir_1_array[z]
+            child_2_array[gun][saat] = l
+          end 
+          if l==bir_2_array[z]
+            child_2_array2[gun][saat] = l
+          end 
+        end
+      end
+      z += 1
+    end
+    #Ders programlarını birleştir ve çocuklara ata ayrıca hata kontrol yap
+    child1.genes=Array.new(day){Array.new(hr)}
+    child2.genes=Array.new(day){Array.new(hr)}
+
+    #Zaman yetişirse tekrarı önleyecek şekilde düzenlenmesi lazım
+    
+    #child1 in 1. yarısı
+    child_1_array.each_with_index do |d,gun|
+      d.each_with_index do |h,saat|
+        unless h.nil?
+          if child1.genes[gun][saat].nil? 
+            child1.genes[gun][saat]=h
+          #boş değilse çakışma var
+          else
+            #rasgele boş yere koy
+            k=true
+            while k
+              g=rand(day)
+              s=rand(hr)
+              if child1.genes[g][s].nil?
+                child1.genes[g][s]=h
+                k=false
+              end
+            end
+          end
+        end
+      end
+    end
+
+    #child1 in  2.yarısı
+    child_2_array2.each_with_index do |d,gun|
+      d.each_with_index do |h,saat|
+        unless h.nil?
+          if child1.genes[gun][saat].nil? 
+            child1.genes[gun][saat]=h
+          #boş değilse çakışma var
+          else
+            #rasgele boş yere koy
+            k=true
+            while k
+              g=rand(day)
+              s=rand(hr)
+              if child1.genes[g][s].nil?
+                child1.genes[g][s]=h
+                k=false
+              end
+            end
+          end
+        end
+      end
+    end
+
+    #child2 in 1. yarısı
+    child_1_array2.each_with_index do |d,gun|
+      d.each_with_index do |h,saat|
+        unless h.nil?
+          if child2.genes[gun][saat].nil? 
+            child2.genes[gun][saat]=h
+          #boş değilse çakışma var
+          else
+            #rasgele boş yere koy
+            k=true
+            while k
+              g=rand(day)
+              s=rand(hr)
+              if child2.genes[g][s].nil?
+                child2.genes[g][s]=h
+                k=false
+              end
+            end
+          end
+        end
+      end
+    end
+
+    #child2 in  2.yarısı
+    child_2_array.each_with_index do |d,gun|
+      d.each_with_index do |h,saat|
+        unless h.nil?
+          if child2.genes[gun][saat].nil? 
+            child2.genes[gun][saat]=h
+          #boş değilse çakışma var
+          else
+            #rasgele boş yere koy
+            k=true
+            while k
+              g=rand(day)
+              s=rand(hr)
+              if child2.genes[g][s].nil?
+                child2.genes[g][s]=h
+                k=false
+              end
+            end
+          end
+        end
+      end
+    end
+
+  
     return child1,child2
+
+    #birey_P1 = birey[0, day/2]
+    #birey_P2 = birey[day/2..-1]
+    #birey2_P1 = birey2[0, day/2]
+    #birey2_P2 = birey2[day/2..-1]
+    #child1.genes=birey_P1+birey2_P2
+    #child2.genes=birey2_P1+birey_P2
+    #return child1,child2
   end
 
   def mutation(mRate)
@@ -68,21 +220,21 @@ class Dna
 
   def fitness
     @score=0
-    temp=Hash.new
-    @genes.each_with_index do |gen,row|
-      gen.each_with_index do |modul,col|
-        if temp[modul].nil?
-          temp[modul] = 1
-        else
-          temp[modul] += 1
-        end
-      end
-    end
+    #temp=Hash.new
+    #@genes.each_with_index do |gen,row|
+     # gen.each_with_index do |modul,col|
+      #  if temp[modul].nil?
+       #   temp[modul] = 1
+       # else
+        #  temp[modul] += 1
+        #end
+      #end
+    #end
     @genes.each_with_index do |gen,row|
       gen.each_with_index do |modul,col|
         if !(modul.blank?)
           #Aynı saatteki bütün dersleri bul
-          ws = Weeklyschedule.where(day_id:row , lessonhours_id:col)
+          ws = Weeklyschedule.where(day_id:row , lessonhour_id:col)
           cur=Curriculum.find(modul)
           curgrade=cur.departmentlesson.grade
           hour = Departmentlesson.find(cur.departmentlesson_id).hour_amount
@@ -98,9 +250,10 @@ class Dna
             if cur.departmentlesson.grade != wsc.departmentlesson.grade
               @score = @score + 1
             end
-            if hour == temp[cur.id]
-              @score = @score +1
-            end
+            #Ders sayısı
+            #if hour == temp[cur.id]
+             # @score = @score +1
+            #end
           end
         end
       end
